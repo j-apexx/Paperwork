@@ -141,7 +141,7 @@
                     <div class="col-sm-12">
                         <asp:GridView ID="GridViewNotifications" CssClass="mGrid" runat="server" DataSourceID="SqlDataSourceNotifications" AutoGenerateColumns="False"
                             DataKeyNames="ProgramYear,DistrictID,NotificationDate" ShowFooter="True" OnRowCommand="GridViewNotifications_RowCommand" ShowHeaderWhenEmpty="True" 
-                                OnRowDataBound="GridViewNotifications_RowDataBound" AllowSorting="False">
+                            OnRowDataBound="GridViewNotifications_RowDataBound" AllowSorting="False">
                             <Columns>
                                 <asp:TemplateField HeaderText="Date" SortExpression="NotificationDate" HeaderStyle-Width="100">
                                     <EditItemTemplate>
