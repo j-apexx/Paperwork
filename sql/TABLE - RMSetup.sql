@@ -1,0 +1,20 @@
+
+/****** Object:  Table [dbo].[RMNames]    Script Date: 2/23/2020 8:35:10 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[RMSetup](
+	[RMName] [nvarchar](50) NOT NULL,
+	[Active] [bit] NOT NULL Default 0,
+	[RMNumber] [smallint] NOT NULL,
+ CONSTRAINT [PK_RMSetup] PRIMARY KEY CLUSTERED 
+(
+	[RMNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

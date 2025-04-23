@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSourcePaperwork">
+      <DataSourceReference>/PaperworkWeb/DS_Paperwork</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>55da70ab-c34e-4bcf-a850-e533cb4f81a7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSetDistricts">
+      <Query>
+        <DataSourceName>DataSourcePaperwork</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@ProgramYear">
+            <Value>=Parameters!ProgramYear.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@DistrictID">
+            <Value>=Parameters!DistrictID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT
+  DistrictYearInfo.ProgramYear
+  ,District.DistrictID
+  ,District.DistrictName
+FROM
+  DistrictYearInfo
+  INNER JOIN District
+    ON DistrictYearInfo.DistrictID = District.DistrictID
+WHERE
+  DistrictYearInfo.DistrictID LIKE @DistrictID
+  AND DistrictYearInfo.ProgramYear LIKE @ProgramYear
+  AND DistrictYearInfo.AcctType = 2
+  AND District.Inactive = 0
+ORDER BY District.DistrictName</CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
+            <AutoJoin>False</AutoJoin>
+            <SelectedColumns>
+              <ColumnExpression ColumnOwner="DistrictYearInfo" ColumnName="ProgramYear" />
+              <ColumnExpression ColumnOwner="District" ColumnName="DistrictID" />
+              <ColumnExpression ColumnOwner="District" ColumnName="DistrictName" />
+            </SelectedColumns>
+            <Joins>
+              <Join Type="CROSS JOIN" ColumnOwner="DistrictYearInfo" />
+              <Join Type="INNER JOIN" ColumnOwner="District">
+                <On>
+                  <From ColumnOwner="DistrictYearInfo" ColumnName="DistrictID" />
+                  <To ColumnOwner="District" ColumnName="DistrictID" />
+                </On>
+              </Join>
+            </Joins>
+            <Filters>
+              <Filter Operator="LIKE" Param="True">
+                <ColumnExpression ColumnOwner="DistrictYearInfo" ColumnName="DistrictID" />
+              </Filter>
+              <Filter Operator="LIKE" Param="True">
+                <ColumnExpression ColumnOwner="DistrictYearInfo" ColumnName="ProgramYear" />
+              </Filter>
+              <Filter Operator="=">
+                <ColumnExpression ColumnOwner="DistrictYearInfo" ColumnName="AcctType" />
+                <FilterValue>2</FilterValue>
+              </Filter>
+              <Filter Operator="=">
+                <ColumnExpression ColumnOwner="District" ColumnName="Inactive" />
+                <FilterValue>0</FilterValue>
+              </Filter>
+            </Filters>
+          </QueryDefinition>
+        </rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="DistrictID">
+          <DataField>DistrictID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DistrictName">
+          <DataField>DistrictName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProgramYear">
+          <DataField>ProgramYear</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSetProgramYears">
+      <SharedDataSet>
+        <SharedDataSetReference>/PaperworkWeb/ProgramYears</SharedDataSetReference>
+        <rd:ReportServerUrl>http://nu-sql-irw-1/reportserver_DYNAMICSGP</rd:ReportServerUrl>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="ProgramYear">
+          <DataField>ProgramYear</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSetDates">
+      <SharedDataSet>
+        <SharedDataSetReference>/PaperworkWeb/DatasetStandardDates</SharedDataSetReference>
+        <rd:ReportServerUrl>http://nu-sql-irw-1/reportserver_DYNAMICSGP</rd:ReportServerUrl>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="PREVMONTHStart">
+          <DataField>PREVMONTHStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="PREVMONTHEnd">
+          <DataField>PREVMONTHEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="CURRMONTHStart">
+          <DataField>CURRMONTHStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="CURRMONTHEnd">
+          <DataField>CURRMONTHEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.46875in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Subreport Name="SubreportFullBillPurch">
+                          <ReportName>/PaperworkWeb/Invoice Full Bill Purch</ReportName>
+                          <Parameters>
+                            <Parameter Name="ProgramYear">
+                              <Value>=Fields!ProgramYear.Value</Value>
+                            </Parameter>
+                            <Parameter Name="DistrictID">
+                              <Value>=Fields!DistrictID.Value</Value>
+                            </Parameter>
+                            <Parameter Name="StartDate">
+                              <Value>=Parameters!StartDate.Value</Value>
+                            </Parameter>
+                            <Parameter Name="EndDate">
+                              <Value>=Parameters!EndDate.Value</Value>
+                            </Parameter>
+                          </Parameters>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Subreport>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details">
+                    <PageBreak>
+                      <BreakLocation>Between</BreakLocation>
+                    </PageBreak>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <NoRowsMessage>No records found or the selected district is not a Full Bill Purchase account.</NoRowsMessage>
+            <DataSetName>DataSetDistricts</DataSetName>
+            <Height>0.25in</Height>
+            <Width>4.46875in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>0.25in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>4.46875in</Width>
+      <Page>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="ProgramYear">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>DataSetProgramYears</DataSetName>
+          <ValueField>ProgramYear</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>ProgramYear</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>DataSetProgramYears</DataSetName>
+          <ValueField>ProgramYear</ValueField>
+          <LabelField>ProgramYear</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="DistrictID">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>District ID</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>DataSetDates</DataSetName>
+          <ValueField>PREVMONTHStart</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Start Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EndDate">
+      <DataType>DateTime</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>DataSetDates</DataSetName>
+          <ValueField>PREVMONTHEnd</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>End Date</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ProgramYear</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DistrictID</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>StartDate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>EndDate</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportServerUrl>http://nu-sql-irw-1/reportserver_DYNAMICSGP</rd:ReportServerUrl>
+  <rd:ReportID>baac66bb-54b8-46d4-9600-13c99d9a659d</rd:ReportID>
+</Report>

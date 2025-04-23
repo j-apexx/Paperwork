@@ -1,0 +1,692 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body{
+    margin-top:75px;
+    font-size:0.9em !important;
+}
+
+#map{
+    height:550px;
+}
+
+.navbar {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.textboxlong {
+    max-width: 1000px !important; /*Override the max width which is being restricted by some other CSS*/
+    text-align: left;
+    width: 100%;
+}
+
+input[type=checkbox] {
+    -ms-transform: scale(1.25); /* IE */
+    -moz-transform: scale(1.25); /* FF */
+    -webkit-transform: scale(1.25); /* Safari and Chrome */
+    -o-transform: scale(1.25); /* Opera */
+    transform: scale(1.25); /*make them slightly larger*/
+    margin: 5px 5px 5px 5px;
+    /*margin-right: 3px; keeps label from smashing against the checkbox
+    margin-left: 3px;*/
+    display:inline;
+    /*padding-right: 10px;*/
+    float:none;
+    position:relative;
+    text-align: left;
+}
+
+.cblistPad input {
+    margin-left: 15px;
+}
+
+.cblistPad td {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+    .cblistPad td label {
+        display: inline-block;
+        width: 175px;
+        white-space: nowrap;
+        background-color: white;
+        margin-bottom: 0px;
+        text-align: left;
+    }
+
+.cblistPad input {
+    width: 15px;
+    height: 15px;
+}
+
+.StationaryGridHeader {
+    background-color: green;
+    /*border-left: solid 1px #c1c1c1;*/
+    padding: 4px 4px;
+    color: #fff;
+    background: linear-gradient(#03396D,#5F7183);
+    border-left: solid 1px #525252;
+    font-size: 0.9em;
+    height: 30px;
+    width: 100%;
+}
+.StationaryGridHeader td{
+    padding: 2px;
+    border: solid 1px #525252;
+}
+
+/* Used to highlight dragged record when sorting */
+.SortSelected {
+    border-width: 5px !important;
+    border-color: yellow !important;
+    border-style:solid;
+    background:  border-box !important;
+    background-color: lightgoldenrodyellow !important;
+}
+
+
+
+/*override for the sortable box placeholder */
+.ui-sortable-placeholder {
+    background: border-box !important;
+    background-color: gray !important;
+    width:100%;
+    height: 75px;
+    color: black;
+    border: solid;
+    border-width: 5px !important;
+    border-color: black !important;
+}
+
+
+
+
+.validators {
+    color: red;
+}
+
+.invalidCount{
+    background-color:hotpink !important;
+}
+
+
+
+/* Custom grid css thanks to http://atashbahar.com/post/2009-01-23-aspnet-gridview-makeover-using-css */
+.mGrid {
+    width: 100%;
+    background-color: #fff;
+    margin: 0 0 10px 0;/*top right bottom left*/
+    border: solid 1px #525252;
+    border-collapse: collapse;
+}
+
+
+
+.mGridRecaps {
+    width:100%;
+    background-color: #aaa;
+    margin: 0 500px 10px 0; /*top right bottom left*/
+    padding: 0 50px 0 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+    table-layout:fixed;
+    overflow:hidden;
+}
+    .mGridRecaps table {
+        border: solid 9px double;
+        border-color: red;
+        table-layout: fixed;
+        overflow: hidden;
+    }
+    .mGridRecaps #FormViewSales {
+
+        border: solid 9px double;
+        border-color: red;
+        table-layout: fixed;
+        overflow: hidden;
+        
+    }
+
+    .mGridRecaps input {
+        text-align: right;
+    }
+
+
+    .mGridRecaps td input[type=checkbox] {
+        /* Larger Checkboxes */
+        -ms-transform: scale(1.25); /* IE */
+        -moz-transform: scale(1.25); /* FF */
+        -webkit-transform: scale(1.25); /* Safari and Chrome */
+        -o-transform: scale(1.25); /* Opera */
+        transform: scale(1.25);
+        margin: 5px 10px 10px 10px;
+    }
+
+.regular-checkbox {
+    
+}
+
+.mGridPager {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.mGridPager td {
+    width: 30px !important;
+}
+
+.mGridRecaps td ,
+.mGrid td {
+    padding: 0;
+    border: solid 1px #c1c1c1;
+    vertical-align: top;
+    color: dimgray;
+    margin-bottom: 0;
+}
+    .mGridRecaps td:first-child,
+    .mGrid td:first-child {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .mGrid td input {
+        height: 20px;
+        font-size: small;
+        padding: 0;
+        text-align: center;
+    }
+
+
+    .mGrid th {
+        padding: 4px 4px;
+        color: #fff;
+        /*background: #424242 url(../Images/grd_head.png) repeat-x top*/
+        background: linear-gradient(#004D2E,#007848);
+        border-left: solid 1px #525252;
+        font-size: 0.9em;
+        text-align: center;
+        position:sticky;
+        top:0px;
+        z-index:1;
+    }
+    .mGrid th a{
+	color:#CCFFFF;
+}
+
+    /*.mGrid .alt { background: linear-gradient(#03396D,#c1c1c1); #fcfcfc url(../Images/grd_head.png) repeat-x top;}*/
+.mGridRecaps tr:nth-child(2n+1),
+.mGrid tr:nth-child(2n+1) {
+    background: linear-gradient(#E8E8E8,#FFFFFF);
+}
+.mGridRecaps tr:nth-child(2n),
+.mGrid tr:nth-child(2n) {
+    background-color: white;
+}
+
+    .mGridRecaps .pgr,
+    .mGrid .pgr {
+        background: linear-gradient(#c1c1c1,#03396D); /*#424242 url(../Images/grd_pgr.png) repeat-x top; */
+        text-align: center;
+        padding: 10px;
+    }
+
+    .mGridRecaps .pgr table,
+    .mGrid .pgr table {
+        margin: 50px 0;
+        text-align: center;
+    }
+
+        .mGridRecaps .pgr td,
+        .mGrid .pgr td {
+            border-width: 10px;
+            padding: 12px;
+            border-left: solid 1px #666;
+            font-weight: bolder;
+            color: #fff;
+            line-height: 12px;
+            width: 200px;
+        }
+
+        .mGridRecaps .pgr a,
+        .mGrid .pgr a {
+            color: #666;
+            text-decoration: none;
+        }
+
+            .mGridRecaps .pgr a:hover,
+            .mGrid .pgr a:hover {
+                color: #000;
+                text-decoration: none;
+            }
+
+        .mGridRecaps .pgr input,
+        .mGrid .pgr input {
+            background-color: red;
+        }
+
+        .mGrid .longTextBox{
+            max-width:100%;/*Override the max width which is being restricted by some other CSS*/
+            text-align:left;
+            width:100%;
+        }
+
+        .mGridRecaps .longTextBox {
+            max-width: 100%; /*Override the max width which is being restricted by some other CSS*/
+            text-align: left;
+            width: 100%;
+        }
+
+.SpGrid {
+    width: 100%;
+    background-color: transparent;
+    margin: 0 0 10px 0; /*top right bottom left*/
+    border-width:0;
+}
+
+    .SpGrid td:first-child {
+        border-color: none;
+    }
+
+    .SpGrid tr:nth-child(2n+1) {
+        background:none;
+    }
+
+
+#SalesTotals {
+    /*width: 250px;*/
+    background-color: aliceblue;
+    z-index: 2;
+    /*position: absolute;
+    left: 101%;*/
+    border-radius: 20px;
+    padding: 5px;
+    border-color:  lightgrey;
+    border-style: double;
+    border-width: 5px;
+    overflow-wrap: normal;
+    margin-left:5px;
+}
+
+    #SalesTotals table {
+        /*width: 200px;*/
+        text-align: right;
+    }
+
+        #SalesTotals table tr td input {
+            border: 1px solid gray;
+            text-align: right;
+            width:50px;
+        }
+
+
+.mGridLinkButton {
+    border-left: 4px solid ghostwhite;
+    border-right: 4px solid darkgray;
+    border-top: 4px solid ghostwhite;
+    border-bottom: 4px solid gray;
+    background-color: WhiteSmoke;
+    height: 30px;
+    width: 80px;
+    vertical-align: middle;
+    text-align: center;
+    padding-top:2px;
+    border-radius:3px 3px;
+    left: 0px;
+}
+.mGridLinkButton a:hover{
+    text-decoration:none;
+}
+
+.mGridLinkIconButton {
+    border-left: 4px solid ghostwhite;
+    border-right: 4px solid darkgray;
+    border-top: 4px solid ghostwhite;
+    border-bottom: 4px solid gray;
+    background-color: WhiteSmoke;
+    height: 25px;
+    width: 25px;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 0px;
+    border-radius: 3px 3px;
+    left: 0px;
+}
+
+.TotalsGVDscrCell {
+    width: 30%;
+}
+
+.TotalsGVNumsCell {
+    width: 5%;
+}
+
+.calendarClass {
+    background: white;
+    position: absolute;
+    display: inline-table;
+    z-index: 1;
+    display: none;
+    font-weight: bolder;
+    color: #003399;
+    border-color: #3366CC;
+    border-width: 1px;
+    padding: 0 0 0 0;
+}
+
+#GridViewHeightController {
+
+
+}
+
+
+
+.buttonPanel {
+    text-align: center;
+    width: 100%;
+    color: darkslategrey;
+    font-weight: 600;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.divBanner {
+    background-color: darkslategrey;
+    font-weight: 600;
+    color: antiquewhite;
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 0;
+}
+
+.loadingDiv {
+    transition: opacity .05s ease-in-out;
+    -moz-transition: opacity .05s ease-in-out;
+    -webkit-transition: opacity .05s ease-in-out;
+    -o-transition: opacity .05s ease-in-out;
+    opacity: 0.7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1;
+}
+
+.loadingImage {
+    position: relative;
+    top: 45%;
+    left: 45%;
+    opacity: 1.0;
+}
+
+.ReportViewerClass {
+    position: relative;
+    top: 10px;
+    padding: 1px 1px 1px 1px;
+    margin-bottom: 30px;
+}
+
+.inventoryReportClass{
+    position:relative;
+    margin-top:10px;
+    top:50px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+#CoverSheet input {
+    text-align: right;
+    background-color: lightgray;
+    width: 100px;
+}
+
+.coverLabel {
+    text-underline-position: left;
+    border-bottom: solid;
+    border-bottom-color: lightgray;
+    border-bottom-width: 1px;
+    vertical-align: middle;
+}
+
+.coverLowerLabel {
+    display: inline-block;
+    font-weight: 600;
+}
+
+.highlight {
+    background-color: yellow !important;
+}
+.highlightDisabled {
+    background-color: palegoldenrod !important;
+}
+
+.greenHighlighter{
+    background-color: chartreuse !important;
+}
+
+.blueHighighter{
+    background-color:deepskyblue !important;
+}
+
+.locked   {
+    position: relative;
+    border-style: solid !important;
+    background-color: whitesmoke;
+    border-width: 1px !important;
+    border-color:black !important;
+    z-index: 99;    
+}
+    .locked span {
+        border: 1px solid whitesmoke;
+        height: 65px;
+    }
+
+
+
+
+
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input[type=text], input[type=password], input[type=email], input[type=tel], input[type=select] {
+    max-width: 280px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: 10px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+}
+
+/*submenu code*/
+.dropdown-submenu {
+    position: relative;
+}
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #cccccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #ffffff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left > .dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+.messagealert {
+    width: 50%;
+    padding: 0;
+    font-size: larger;
+    z-index:1;
+    position:fixed;
+    text-align:center;
+}
+
+.iconAlert{
+    padding:0;
+    font-size:larger;
+}
+
+.HDRPrint{
+    float:right !important;
+}
+
+/*The following is used with the JQuery-UI calendar control and page code to highlight dates already entered with data*/
+.ui-datepicker .calendarHighlighted {
+    /*Outline*/
+    background-color: darkgreen;
+}
+    .ui-datepicker .calendarHighlighted a {
+        color: green !important;
+        font-weight: bold;
+        background-color: palegreen;
+        text-decoration: underline;
+    }
+
+.ui-datepicker .calendarLocked {
+    /*Outline*/
+    background-color: darkgray;
+}
+    .ui-datepicker .calendarLocked a {
+        color: darkslategrey !important;
+        font-weight: bold;
+        background-color: lightsteelblue;
+        text-decoration: underline;
+    }
+
+.ui-datepicker .calendarRevised {
+    /*Outline*/
+    background-color: darkgray;
+}
+
+    .ui-datepicker .calendarRevised a {
+        color:  teal !important;
+        font-weight: bold;
+        background-color: aquamarine;
+        text-decoration: underline;
+    }
+
+.ui-datepicker .calendarPosting {
+    /*Outline*/
+    background-color: darkgray;
+}
+
+    .ui-datepicker .calendarPosting a {
+        color: teal !important;
+        font-weight: bold;
+        background-color: deepskyblue;
+        text-decoration: underline;
+    }
+
+/* For Inventory pages where I just want to display the Month/Year selector without the full calendar. */
+.month_year_datepicker table {
+    display: none;
+}
+
+/* My own smaller version of jumbotron - bootstrap 4 has too much padding top and bottom*/
+.jumbotronsmall {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    /*background-color: #eee;*/
+    background: linear-gradient(#eee,WhiteSmoke);
+    border-radius: 0.5rem;
+}
+
+@media (min-width: 576px) {
+    .jumbotronsmall {
+        padding: 2rem ;
+    }
+}
+
+.jumbotronsmall-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: 0;
+}
+
+
+.AveragesTableCenter td input {
+    text-align: center;
+}
+
+.MenuAnalysisTotal {
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffff99;
+}
+
+.MenuAnalysisCenterBold {
+    text-align: center;
+    font-weight: bold;
+}
+
+.shrink10 {
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+}
+.shrink20 {
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+}
+.shrink50 {
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+}

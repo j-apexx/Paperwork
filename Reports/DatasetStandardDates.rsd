@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>/Commissaries/DS_Commissaries</DataSourceReference>
+      <CommandText>SELECT DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE())-1, 0) PREVMONTHStart,
+DATEADD(MONTH, DATEDIFF(MONTH, -1, GETDATE())-1, -1) PREVMONTHEnd,
+DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) CURRMONTHStart,
+DATEADD(MONTH, DATEDIFF(MONTH, -1, GETDATE()), -1) CURRMONTHEnd,
+CAST(DATEADD(DAY, 6-DATEPART(weekday, GETDATE())  , GETDATE()) AS DATE) CurrentFriday</CommandText>
+      <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+    </Query>
+    <Fields>
+      <Field Name="PREVMONTHStart">
+        <DataField>PREVMONTHStart</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="PREVMONTHEnd">
+        <DataField>PREVMONTHEnd</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="CURRMONTHStart">
+        <DataField>CURRMONTHStart</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="CURRMONTHEnd">
+        <DataField>CURRMONTHEnd</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+      <Field Name="CurrentFriday">
+        <DataField>CurrentFriday</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+  <rd:ReportServerUrl>http://nu-sql-irw-1/reportserver_DYNAMICSGP</rd:ReportServerUrl>
+</SharedDataSet>

@@ -1,0 +1,3 @@
+Note: on 9/24/2019 I updated the site from 3.3.7 to 4.3 bootstrap. For some reason the site did not look right with a version 4.x theme.
+
+When I apply the 3.x Spacelab theme it looks right.

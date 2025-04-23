@@ -1,0 +1,12 @@
+Note: on 9/24/2019 I updated the site from 3.3.7 to 4.3 bootstrap. 
+
+Using Spacelab
+
+Needed to make fundamental changes to site when upgrading from 3.x to 4.x - certain elements are replaced / renamed.
+
+6/8/2020 - used https://bootstrap.build/ to create a modified version of spacelab - prominent color is red to be used with Training company.
+Created as bootstrap(TRAIN).css which will only be copied to training company.
+
+5/18/2022 - using https://bootstrap.build/ to create another modified version of spacelab - prominent color is yellow to be used with SFSP website.
+
+*I found that saving the changes to spacelab was not retaining the gradient. Edit spacelab original and make the color changes to primary, then export the css knowing changes will need to be made again.

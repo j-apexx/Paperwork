@@ -1,0 +1,1501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.props')" />
+  <Import Project="..\packages\Microsoft.NetFramework.Analyzers.2.9.7\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.7\build\Microsoft.NetFramework.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.NetCore.Analyzers.2.9.7\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.7\build\Microsoft.NetCore.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.CodeQuality.Analyzers.2.9.7\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.7\build\Microsoft.CodeQuality.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.7\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.7\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2318164C-3ACA-4888-970F-B869AEF85E55}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Paperwork</RootNamespace>
+    <AssemblyName>Paperwork</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>binRELEASE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AspNet.ScriptManager.bootstrap, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.4.3.1\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery.UI.Combined, Version=1.13.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.UI.Combined.1.13.2\lib\net45\AspNet.ScriptManager.jQuery.UI.Combined.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Visual Studio 2017\Projects\Commissary\Commissary\bin\Microsoft.Exchange.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1537.0\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="app_offline.html" />
+    <Content Include="Content\bootstrap%28SFSP%29.css" />
+    <Content Include="Content\bootstrap%28TOOLBOX%29.css" />
+    <Content Include="Content\bootstrap%28TRAIN%29.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Site%28SFSP%29.css" />
+    <Content Include="Content\Site%28Toolbox%29.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Images\FMSLogoTiny.png" />
+    <Content Include="MenuAnalysisEntry.aspx" />
+    <Content Include="InventoryVerificationSFSP.aspx" />
+    <Content Include="Print\PrintOHCatTaxInv.aspx" />
+    <Content Include="Print\PrintCompanyConsolMenu.aspx" />
+    <Content Include="Print\PrintInventoryVerification.aspx" />
+    <Content Include="Print\PrintOperatingReport.aspx" />
+    <Content Include="Print\PrintReimbVerification.aspx" />
+    <Content Include="Print\PrintSalesNutrForLife.aspx" />
+    <Content Include="Print\PrintSummaryReimVerif.aspx" />
+    <Content Include="Print\PrintSummarySFSPDists.aspx" />
+    <Content Include="ReimbVerification.aspx" />
+    <Content Include="RMEOMComments.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\grd_alt.png" />
+    <Content Include="Images\grd_head.png" />
+    <Content Include="Images\grd_images.png" />
+    <Content Include="Images\grd_pgr.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\NutLogo.png" />
+    <Content Include="Images\UnderMaintenance1.png" />
+    <Content Include="Print\PrintAddOnFeesInvoice.aspx" />
+    <Content Include="Print\PrintRMEOM.aspx" />
+    <Content Include="Print\PrintInventoryDistTotals.aspx" />
+    <Content Include="Print\PrintDiscountsSummary.aspx" />
+    <Content Include="Print\PrintFFVDistInvoiceTotals.aspx" />
+    <Content Include="Print\PrintCompanyFoodCost.aspx" />
+    <Content Include="Print\PrintInvoicePacket.aspx" />
+    <Content Include="Print\PrintPayrollDetail.aspx" />
+    <Content Include="Print\PrintReinhartCredits.aspx" />
+    <Content Include="Print\PrintPayrollHealth.aspx" />
+    <Content Include="Print\PrintSalesDinner.aspx" />
+    <Content Include="Print\PrintSalesAdultLunch.aspx" />
+    <Content Include="Print\PrintUsageSummary.aspx" />
+    <Content Include="Print\PrintEOMChecklist.aspx" />
+    <Content Include="Print\PrintUSDACPM.aspx" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="libman.json" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.13.2.js" />
+    <Content Include="Scripts\jquery-ui-1.13.2.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Setup\SetupMorabitoCustNums.aspx" />
+    <Content Include="Setup\SetupMenuAnalysisLevels.aspx" />
+    <Content Include="Setup\SetupDistrictsInvTerms.aspx" />
+    <Content Include="Setup\SetupEmail.aspx" />
+    <Content Include="Setup\SetupGallikerCustNums.aspx" />
+    <Content Include="Setup\SetupMenuAnalysisItems.aspx" />
+    <Content Include="Setup\SetupVendorCustNums.aspx" />
+    <Content Include="Setup\SetupTransmittalOptions.aspx" />
+    <Content Include="Setup\SetupVPs.aspx" />
+    <Content Include="Setup\SetupSpFnOrganizations.aspx" />
+    <Content Include="Setup\SetupProgramTypes.aspx" />
+    <Content Include="Utilities\ExportFBPassThru.aspx" />
+    <Content Include="Print\PrintCN7.aspx" />
+    <Content Include="Print\PrintCN6.aspx" />
+    <Content Include="Print\PrintCPMInvoiceSummary.aspx" />
+    <Content Include="Print\PrintEditCheckSummary.aspx" />
+    <Content Include="Print\PrintCPMPLReport.aspx" />
+    <Content Include="Print\PrintFullBillSummary.aspx" />
+    <Content Include="Print\PrintInvoiceFullBillPurchwCPMFees.aspx" />
+    <Content Include="Print\PrintInvoiceFullBillUsagewCPMFees.aspx" />
+    <Content Include="Print\PrintNotifications.aspx" />
+    <Content Include="Print\PrintBudgetReport.aspx" />
+    <Content Include="Print\PrintDetailedProfitCPM.aspx" />
+    <Content Include="Print\PrintDetailedProfitFB.aspx" />
+    <Content Include="Print\PrintCOVIDCPMSales.aspx" />
+    <Content Include="Print\PrintSchoolInvAndFees.aspx" />
+    <Content Include="Print\PrintOperatingStatistics.aspx" />
+    <Content Include="Print\PrintOperatingReportAll.aspx" />
+    <Content Include="Print\PrintInvoiceFullBillUsage.aspx" />
+    <Content Include="Print\PrintEditCheckBySchool.aspx" />
+    <Content Include="Print\PrintLunchClaim.aspx" />
+    <Content Include="Print\PrintPayroll.aspx" />
+    <Content Include="Print\PrintSnackSales.aspx" />
+    <Content Include="Print\PrintTransmittalsOther.aspx" />
+    <Content Include="Print\PrintSalesRevisionsDetail.aspx" />
+    <Content Include="Print\PrintSalesRevisions.aspx" />
+    <Content Include="Print\PrintSalesDistrict.aspx" />
+    <Content Include="Print\PrintSales.aspx" />
+    <Content Include="Print\PrintSpecialFuncInvoices.aspx" />
+    <Content Include="Print\PrintSpFnLedger.aspx" />
+    <Content Include="SalesEntry.aspx" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Setup\SetupDistrictContacts.aspx" />
+    <Content Include="Setup\SetupEmployees.aspx" />
+    <Content Include="DistrictPayrollEntry.aspx" />
+    <Content Include="Setup\SetupMilkDelivery.aspx" />
+    <Content Include="Setup\VendorRequest.aspx" />
+    <Content Include="Setup\SetupPaycodes.aspx" />
+    <Content Include="Setup\SetupMMBItems.aspx" />
+    <Content Include="MMBEntry.aspx" />
+    <Content Include="Tools\jcalc - Copy.js" />
+    <Content Include="Tools\jcalc.html" />
+    <Content Include="Tools\jcalc.js" />
+    <Content Include="Tools\jcalcstyle.css" />
+    <Content Include="Tools\minicalc.png" />
+    <Content Include="Utilities\ImportAddonFees.aspx" />
+    <Content Include="Utilities\ImportMorabito.aspx" />
+    <Content Include="Utilities\ImportPOS.aspx" />
+    <Content Include="Utilities\ImportPayroll.aspx" />
+    <Content Include="Utilities\ImportInsurance.aspx" />
+    <Content Include="Utilities\ImportGalliker.aspx" />
+    <Content Include="Utilities\ImportTransmittalsGeneric.aspx" />
+    <Content Include="Utilities\ImportReinhartCredits.aspx" />
+    <Content Include="Utilities\ImportReinhart.aspx" />
+    <Content Include="Utilities\FBPrepays.aspx" />
+    <Content Include="Print\ExportRMEOM.aspx" />
+    <Content Include="Utilities\ExportInvChange.aspx" />
+    <Content Include="Utilities\InvAdjustments.aspx" />
+    <Content Include="Utilities\RollForwardPurchInventory.aspx" />
+    <Content Include="Utilities\PayrollAccruals.aspx" />
+    <Content Include="Utilities\PayablesExport.aspx" />
+    <Content Include="Setup\SetupPurchOtherCats.aspx" />
+    <Content Include="InventoryEntry.aspx" />
+    <Content Include="Print\PrintUSDACover.aspx" />
+    <Content Include="Print\PrintMMB.aspx" />
+    <Content Include="Print\PrintInvoiceCostPerMeal.aspx" />
+    <Content Include="Setup\SetupOtherSales.aspx" />
+    <Content Include="OtherSales.aspx" />
+    <Content Include="SpecialFunctionsEntry.aspx" />
+    <Content Include="Setup\SetupSpFnInvoices.aspx" />
+    <Content Include="Setup\GlobalSettings.aspx" />
+    <Content Include="Print\PrintInvoiceFullBillPurch.aspx" />
+    <Content Include="Utilities\LockTransactions.aspx" />
+    <Content Include="Days.aspx" />
+    <Content Include="Notifications.aspx" />
+    <Content Include="Setup\SetupRegionalMgrs.aspx" />
+    <Content Include="Utilities\ImportIndirectCosts.aspx" />
+    <Content Include="Setup\SetupRFSCustNums.aspx" />
+    <Content Include="Utilities\InvoiceCredits.aspx" />
+    <Content Include="Utilities\RMAdjustments.aspx" />
+    <Content Include="Utilities\CostPerMealInvoices.aspx" />
+    <Content Include="Setup\SetupTaxRates.aspx" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Print\PrintPurchasesSummary.aspx" />
+    <Content Include="Utilities\ImportExtraChef.aspx" />
+    <Content Include="EOMChecklist.aspx" />
+    <Content Include="Setup\SetupDistrictInfo.aspx" />
+    <Content Include="Setup\SetupSchoolInfo.aspx" />
+    <Content Include="Setup\SetupUsers.aspx" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Unauthorized.aspx" />
+    <Content Include="Setup\SetupProgramYear.aspx" />
+    <Content Include="Setup\SetupDistricts.aspx" />
+    <Content Include="Purchases.aspx" />
+    <Content Include="Setup\SetupDistrictVendors.aspx" />
+    <Content Include="Setup\SetupSchools.aspx" />
+    <Content Include="Print\PrintTransmittals.aspx" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Site.Master" />
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Bundle.config" />
+    <Content Include="Site.Mobile.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MenuAnalysisEntry.aspx.cs">
+      <DependentUpon>MenuAnalysisEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuAnalysisEntry.aspx.designer.cs">
+      <DependentUpon>MenuAnalysisEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryVerificationSFSP.aspx.cs">
+      <DependentUpon>InventoryVerificationSFSP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InventoryVerificationSFSP.aspx.designer.cs">
+      <DependentUpon>InventoryVerificationSFSP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintOHCatTaxInv.aspx.cs">
+      <DependentUpon>PrintOHCatTaxInv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintOHCatTaxInv.aspx.designer.cs">
+      <DependentUpon>PrintOHCatTaxInv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintCompanyConsolMenu.aspx.cs">
+      <DependentUpon>PrintCompanyConsolMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintCompanyConsolMenu.aspx.designer.cs">
+      <DependentUpon>PrintCompanyConsolMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInventoryVerification.aspx.cs">
+      <DependentUpon>PrintInventoryVerification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInventoryVerification.aspx.designer.cs">
+      <DependentUpon>PrintInventoryVerification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintOperatingReport.aspx.cs">
+      <DependentUpon>PrintOperatingReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintOperatingReport.aspx.designer.cs">
+      <DependentUpon>PrintOperatingReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintReimbVerification.aspx.cs">
+      <DependentUpon>PrintReimbVerification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintReimbVerification.aspx.designer.cs">
+      <DependentUpon>PrintReimbVerification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSalesNutrForLife.aspx.cs">
+      <DependentUpon>PrintSalesNutrForLife.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSalesNutrForLife.aspx.designer.cs">
+      <DependentUpon>PrintSalesNutrForLife.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSummaryReimVerif.aspx.cs">
+      <DependentUpon>PrintSummaryReimVerif.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSummaryReimVerif.aspx.designer.cs">
+      <DependentUpon>PrintSummaryReimVerif.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSummarySFSPDists.aspx.cs">
+      <DependentUpon>PrintSummarySFSPDists.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSummarySFSPDists.aspx.designer.cs">
+      <DependentUpon>PrintSummarySFSPDists.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReimbVerification.aspx.cs">
+      <DependentUpon>ReimbVerification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReimbVerification.aspx.designer.cs">
+      <DependentUpon>ReimbVerification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RMEOMComments.aspx.cs">
+      <DependentUpon>RMEOMComments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RMEOMComments.aspx.designer.cs">
+      <DependentUpon>RMEOMComments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintAddOnFeesInvoice.aspx.cs">
+      <DependentUpon>PrintAddOnFeesInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintAddOnFeesInvoice.aspx.designer.cs">
+      <DependentUpon>PrintAddOnFeesInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintRMEOM.aspx.cs">
+      <DependentUpon>PrintRMEOM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintRMEOM.aspx.designer.cs">
+      <DependentUpon>PrintRMEOM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInventoryDistTotals.aspx.cs">
+      <DependentUpon>PrintInventoryDistTotals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInventoryDistTotals.aspx.designer.cs">
+      <DependentUpon>PrintInventoryDistTotals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintDiscountsSummary.aspx.cs">
+      <DependentUpon>PrintDiscountsSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintDiscountsSummary.aspx.designer.cs">
+      <DependentUpon>PrintDiscountsSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintFFVDistInvoiceTotals.aspx.cs">
+      <DependentUpon>PrintFFVDistInvoiceTotals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintFFVDistInvoiceTotals.aspx.designer.cs">
+      <DependentUpon>PrintFFVDistInvoiceTotals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintCompanyFoodCost.aspx.cs">
+      <DependentUpon>PrintCompanyFoodCost.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintCompanyFoodCost.aspx.designer.cs">
+      <DependentUpon>PrintCompanyFoodCost.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInvoicePacket.aspx.cs">
+      <DependentUpon>PrintInvoicePacket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInvoicePacket.aspx.designer.cs">
+      <DependentUpon>PrintInvoicePacket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintPayrollDetail.aspx.cs">
+      <DependentUpon>PrintPayrollDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintPayrollDetail.aspx.designer.cs">
+      <DependentUpon>PrintPayrollDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintReinhartCredits.aspx.cs">
+      <DependentUpon>PrintReinhartCredits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintReinhartCredits.aspx.designer.cs">
+      <DependentUpon>PrintReinhartCredits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintPayrollHealth.aspx.cs">
+      <DependentUpon>PrintPayrollHealth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintPayrollHealth.aspx.designer.cs">
+      <DependentUpon>PrintPayrollHealth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSalesDinner.aspx.cs">
+      <DependentUpon>PrintSalesDinner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSalesDinner.aspx.designer.cs">
+      <DependentUpon>PrintSalesDinner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSalesAdultLunch.aspx.cs">
+      <DependentUpon>PrintSalesAdultLunch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSalesAdultLunch.aspx.designer.cs">
+      <DependentUpon>PrintSalesAdultLunch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintUsageSummary.aspx.cs">
+      <DependentUpon>PrintUsageSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintUsageSummary.aspx.designer.cs">
+      <DependentUpon>PrintUsageSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintEOMChecklist.aspx.cs">
+      <DependentUpon>PrintEOMChecklist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintEOMChecklist.aspx.designer.cs">
+      <DependentUpon>PrintEOMChecklist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintUSDACPM.aspx.cs">
+      <DependentUpon>PrintUSDACPM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintUSDACPM.aspx.designer.cs">
+      <DependentUpon>PrintUSDACPM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupMorabitoCustNums.aspx.cs">
+      <DependentUpon>SetupMorabitoCustNums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupMorabitoCustNums.aspx.designer.cs">
+      <DependentUpon>SetupMorabitoCustNums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupMenuAnalysisLevels.aspx.cs">
+      <DependentUpon>SetupMenuAnalysisLevels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupMenuAnalysisLevels.aspx.designer.cs">
+      <DependentUpon>SetupMenuAnalysisLevels.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictsInvTerms.aspx.cs">
+      <DependentUpon>SetupDistrictsInvTerms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictsInvTerms.aspx.designer.cs">
+      <DependentUpon>SetupDistrictsInvTerms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupEmail.aspx.cs">
+      <DependentUpon>SetupEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupEmail.aspx.designer.cs">
+      <DependentUpon>SetupEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupGallikerCustNums.aspx.cs">
+      <DependentUpon>SetupGallikerCustNums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupGallikerCustNums.aspx.designer.cs">
+      <DependentUpon>SetupGallikerCustNums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupMenuAnalysisItems.aspx.cs">
+      <DependentUpon>SetupMenuAnalysisItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupMenuAnalysisItems.aspx.designer.cs">
+      <DependentUpon>SetupMenuAnalysisItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupVendorCustNums.aspx.cs">
+      <DependentUpon>SetupVendorCustNums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupVendorCustNums.aspx.designer.cs">
+      <DependentUpon>SetupVendorCustNums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupTransmittalOptions.aspx.cs">
+      <DependentUpon>SetupTransmittalOptions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupTransmittalOptions.aspx.designer.cs">
+      <DependentUpon>SetupTransmittalOptions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupVPs.aspx.cs">
+      <DependentUpon>SetupVPs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupVPs.aspx.designer.cs">
+      <DependentUpon>SetupVPs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupSpFnOrganizations.aspx.cs">
+      <DependentUpon>SetupSpFnOrganizations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupSpFnOrganizations.aspx.designer.cs">
+      <DependentUpon>SetupSpFnOrganizations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupProgramTypes.aspx.cs">
+      <DependentUpon>SetupProgramTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupProgramTypes.aspx.designer.cs">
+      <DependentUpon>SetupProgramTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ExportFBPassThru.aspx.cs">
+      <DependentUpon>ExportFBPassThru.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ExportFBPassThru.aspx.designer.cs">
+      <DependentUpon>ExportFBPassThru.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintCN7.aspx.cs">
+      <DependentUpon>PrintCN7.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintCN7.aspx.designer.cs">
+      <DependentUpon>PrintCN7.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintCN6.aspx.cs">
+      <DependentUpon>PrintCN6.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintCN6.aspx.designer.cs">
+      <DependentUpon>PrintCN6.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintCPMInvoiceSummary.aspx.cs">
+      <DependentUpon>PrintCPMInvoiceSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintCPMInvoiceSummary.aspx.designer.cs">
+      <DependentUpon>PrintCPMInvoiceSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintEditCheckSummary.aspx.cs">
+      <DependentUpon>PrintEditCheckSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintEditCheckSummary.aspx.designer.cs">
+      <DependentUpon>PrintEditCheckSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintCPMPLReport.aspx.cs">
+      <DependentUpon>PrintCPMPLReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintCPMPLReport.aspx.designer.cs">
+      <DependentUpon>PrintCPMPLReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintFullBillSummary.aspx.cs">
+      <DependentUpon>PrintFullBillSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintFullBillSummary.aspx.designer.cs">
+      <DependentUpon>PrintFullBillSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillPurchwCPMFees.aspx.cs">
+      <DependentUpon>PrintInvoiceFullBillPurchwCPMFees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillPurchwCPMFees.aspx.designer.cs">
+      <DependentUpon>PrintInvoiceFullBillPurchwCPMFees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillUsagewCPMFees.aspx.cs">
+      <DependentUpon>PrintInvoiceFullBillUsagewCPMFees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillUsagewCPMFees.aspx.designer.cs">
+      <DependentUpon>PrintInvoiceFullBillUsagewCPMFees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintNotifications.aspx.cs">
+      <DependentUpon>PrintNotifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintNotifications.aspx.designer.cs">
+      <DependentUpon>PrintNotifications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintBudgetReport.aspx.cs">
+      <DependentUpon>PrintBudgetReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintBudgetReport.aspx.designer.cs">
+      <DependentUpon>PrintBudgetReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintDetailedProfitCPM.aspx.cs">
+      <DependentUpon>PrintDetailedProfitCPM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintDetailedProfitCPM.aspx.designer.cs">
+      <DependentUpon>PrintDetailedProfitCPM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintDetailedProfitFB.aspx.cs">
+      <DependentUpon>PrintDetailedProfitFB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintDetailedProfitFB.aspx.designer.cs">
+      <DependentUpon>PrintDetailedProfitFB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintCOVIDCPMSales.aspx.cs">
+      <DependentUpon>PrintCOVIDCPMSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintCOVIDCPMSales.aspx.designer.cs">
+      <DependentUpon>PrintCOVIDCPMSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSchoolInvAndFees.aspx.cs">
+      <DependentUpon>PrintSchoolInvAndFees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSchoolInvAndFees.aspx.designer.cs">
+      <DependentUpon>PrintSchoolInvAndFees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintOperatingStatistics.aspx.cs">
+      <DependentUpon>PrintOperatingStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintOperatingStatistics.aspx.designer.cs">
+      <DependentUpon>PrintOperatingStatistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintOperatingReportAll.aspx.cs">
+      <DependentUpon>PrintOperatingReportAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintOperatingReportAll.aspx.designer.cs">
+      <DependentUpon>PrintOperatingReportAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillUsage.aspx.cs">
+      <DependentUpon>PrintInvoiceFullBillUsage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillUsage.aspx.designer.cs">
+      <DependentUpon>PrintInvoiceFullBillUsage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintEditCheckBySchool.aspx.cs">
+      <DependentUpon>PrintEditCheckBySchool.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintEditCheckBySchool.aspx.designer.cs">
+      <DependentUpon>PrintEditCheckBySchool.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintLunchClaim.aspx.cs">
+      <DependentUpon>PrintLunchClaim.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintLunchClaim.aspx.designer.cs">
+      <DependentUpon>PrintLunchClaim.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintPayroll.aspx.cs">
+      <DependentUpon>PrintPayroll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintPayroll.aspx.designer.cs">
+      <DependentUpon>PrintPayroll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSnackSales.aspx.cs">
+      <DependentUpon>PrintSnackSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSnackSales.aspx.designer.cs">
+      <DependentUpon>PrintSnackSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintTransmittalsOther.aspx.cs">
+      <DependentUpon>PrintTransmittalsOther.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintTransmittalsOther.aspx.designer.cs">
+      <DependentUpon>PrintTransmittalsOther.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSalesRevisionsDetail.aspx.cs">
+      <DependentUpon>PrintSalesRevisionsDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSalesRevisionsDetail.aspx.designer.cs">
+      <DependentUpon>PrintSalesRevisionsDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSalesRevisions.aspx.cs">
+      <DependentUpon>PrintSalesRevisions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSalesRevisions.aspx.designer.cs">
+      <DependentUpon>PrintSalesRevisions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSalesDistrict.aspx.cs">
+      <DependentUpon>PrintSalesDistrict.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSalesDistrict.aspx.designer.cs">
+      <DependentUpon>PrintSalesDistrict.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSales.aspx.cs">
+      <DependentUpon>PrintSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSales.aspx.designer.cs">
+      <DependentUpon>PrintSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSpecialFuncInvoices.aspx.cs">
+      <DependentUpon>PrintSpecialFuncInvoices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSpecialFuncInvoices.aspx.designer.cs">
+      <DependentUpon>PrintSpecialFuncInvoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintSpFnLedger.aspx.cs">
+      <DependentUpon>PrintSpFnLedger.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintSpFnLedger.aspx.designer.cs">
+      <DependentUpon>PrintSpFnLedger.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SalesEntry.aspx.cs">
+      <DependentUpon>SalesEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalesEntry.aspx.designer.cs">
+      <DependentUpon>SalesEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictContacts.aspx.cs">
+      <DependentUpon>SetupDistrictContacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictContacts.aspx.designer.cs">
+      <DependentUpon>SetupDistrictContacts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictInfo.aspx.cs">
+      <DependentUpon>SetupDistrictInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictInfo.aspx.designer.cs">
+      <DependentUpon>SetupDistrictInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupSchoolInfo.aspx.cs">
+      <DependentUpon>SetupSchoolInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupSchoolInfo.aspx.designer.cs">
+      <DependentUpon>SetupSchoolInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupMilkDelivery.aspx.cs">
+      <DependentUpon>SetupMilkDelivery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupMilkDelivery.aspx.designer.cs">
+      <DependentUpon>SetupMilkDelivery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupUsers.aspx.cs">
+      <DependentUpon>SetupUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupUsers.aspx.designer.cs">
+      <DependentUpon>SetupUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Paperwork_Global.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Utilities\ImportAddonFees.aspx.cs">
+      <DependentUpon>ImportAddonFees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportAddonFees.aspx.designer.cs">
+      <DependentUpon>ImportAddonFees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportMorabito.aspx.cs">
+      <DependentUpon>ImportMorabito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportMorabito.aspx.designer.cs">
+      <DependentUpon>ImportMorabito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportPOS.aspx.cs">
+      <DependentUpon>ImportPOS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportPOS.aspx.designer.cs">
+      <DependentUpon>ImportPOS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportPayroll.aspx.cs">
+      <DependentUpon>ImportPayroll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportPayroll.aspx.designer.cs">
+      <DependentUpon>ImportPayroll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportInsurance.aspx.cs">
+      <DependentUpon>ImportInsurance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportInsurance.aspx.designer.cs">
+      <DependentUpon>ImportInsurance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportGalliker.aspx.cs">
+      <DependentUpon>ImportGalliker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportGalliker.aspx.designer.cs">
+      <DependentUpon>ImportGalliker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportTransmittalsGeneric.aspx.cs">
+      <DependentUpon>ImportTransmittalsGeneric.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportTransmittalsGeneric.aspx.designer.cs">
+      <DependentUpon>ImportTransmittalsGeneric.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportReinhartCredits.aspx.cs">
+      <DependentUpon>ImportReinhartCredits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportReinhartCredits.aspx.designer.cs">
+      <DependentUpon>ImportReinhartCredits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\FBPrepays.aspx.cs">
+      <DependentUpon>FBPrepays.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\FBPrepays.aspx.designer.cs">
+      <DependentUpon>FBPrepays.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\ExportRMEOM.aspx.cs">
+      <DependentUpon>ExportRMEOM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\ExportRMEOM.aspx.designer.cs">
+      <DependentUpon>ExportRMEOM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ExportInvChange.aspx.cs">
+      <DependentUpon>ExportInvChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ExportInvChange.aspx.designer.cs">
+      <DependentUpon>ExportInvChange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\InvAdjustments.aspx.cs">
+      <DependentUpon>InvAdjustments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\InvAdjustments.aspx.designer.cs">
+      <DependentUpon>InvAdjustments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\RollForwardPurchInventory.aspx.cs">
+      <DependentUpon>RollForwardPurchInventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\RollForwardPurchInventory.aspx.designer.cs">
+      <DependentUpon>RollForwardPurchInventory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PayrollAccruals.aspx.cs">
+      <DependentUpon>PayrollAccruals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PayrollAccruals.aspx.designer.cs">
+      <DependentUpon>PayrollAccruals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\InvoiceCredits.aspx.cs">
+      <DependentUpon>InvoiceCredits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\InvoiceCredits.aspx.designer.cs">
+      <DependentUpon>InvoiceCredits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Unauthorized.aspx.cs">
+      <DependentUpon>Unauthorized.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Unauthorized.aspx.designer.cs">
+      <DependentUpon>Unauthorized.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupProgramYear.aspx.cs">
+      <DependentUpon>SetupProgramYear.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupProgramYear.aspx.designer.cs">
+      <DependentUpon>SetupProgramYear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupDistricts.aspx.cs">
+      <DependentUpon>SetupDistricts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupDistricts.aspx.designer.cs">
+      <DependentUpon>SetupDistricts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchases.aspx.cs">
+      <DependentUpon>Purchases.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchases.aspx.designer.cs">
+      <DependentUpon>Purchases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictVendors.aspx.cs">
+      <DependentUpon>SetupDistrictVendors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupDistrictVendors.aspx.designer.cs">
+      <DependentUpon>SetupDistrictVendors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupSchools.aspx.cs">
+      <DependentUpon>SetupSchools.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupSchools.aspx.designer.cs">
+      <DependentUpon>SetupSchools.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintTransmittals.aspx.cs">
+      <DependentUpon>PrintTransmittals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintTransmittals.aspx.designer.cs">
+      <DependentUpon>PrintTransmittals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupEmployees.aspx.cs">
+      <DependentUpon>SetupEmployees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupEmployees.aspx.designer.cs">
+      <DependentUpon>SetupEmployees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DistrictPayrollEntry.aspx.cs">
+      <DependentUpon>DistrictPayrollEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DistrictPayrollEntry.aspx.designer.cs">
+      <DependentUpon>DistrictPayrollEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\VendorRequest.aspx.cs">
+      <DependentUpon>VendorRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\VendorRequest.aspx.designer.cs">
+      <DependentUpon>VendorRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupPaycodes.aspx.cs">
+      <DependentUpon>SetupPaycodes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupPaycodes.aspx.designer.cs">
+      <DependentUpon>SetupPaycodes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupMMBItems.aspx.cs">
+      <DependentUpon>SetupMMBItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupMMBItems.aspx.designer.cs">
+      <DependentUpon>SetupMMBItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MMBEntry.aspx.cs">
+      <DependentUpon>MMBEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MMBEntry.aspx.designer.cs">
+      <DependentUpon>MMBEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportReinhart.aspx.cs">
+      <DependentUpon>ImportReinhart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportReinhart.aspx.designer.cs">
+      <DependentUpon>ImportReinhart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PayablesExport.aspx.cs">
+      <DependentUpon>PayablesExport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\PayablesExport.aspx.designer.cs">
+      <DependentUpon>PayablesExport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupPurchOtherCats.aspx.cs">
+      <DependentUpon>SetupPurchOtherCats.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupPurchOtherCats.aspx.designer.cs">
+      <DependentUpon>SetupPurchOtherCats.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryEntry.aspx.cs">
+      <DependentUpon>InventoryEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InventoryEntry.aspx.designer.cs">
+      <DependentUpon>InventoryEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintUSDACover.aspx.cs">
+      <DependentUpon>PrintUSDACover.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintUSDACover.aspx.designer.cs">
+      <DependentUpon>PrintUSDACover.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintMMB.aspx.cs">
+      <DependentUpon>PrintMMB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintMMB.aspx.designer.cs">
+      <DependentUpon>PrintMMB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceCostPerMeal.aspx.cs">
+      <DependentUpon>PrintInvoiceCostPerMeal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceCostPerMeal.aspx.designer.cs">
+      <DependentUpon>PrintInvoiceCostPerMeal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupOtherSales.aspx.cs">
+      <DependentUpon>SetupOtherSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupOtherSales.aspx.designer.cs">
+      <DependentUpon>SetupOtherSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OtherSales.aspx.cs">
+      <DependentUpon>OtherSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OtherSales.aspx.designer.cs">
+      <DependentUpon>OtherSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialFunctionsEntry.aspx.cs">
+      <DependentUpon>SpecialFunctionsEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SpecialFunctionsEntry.aspx.designer.cs">
+      <DependentUpon>SpecialFunctionsEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupSpFnInvoices.aspx.cs">
+      <DependentUpon>SetupSpFnInvoices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupSpFnInvoices.aspx.designer.cs">
+      <DependentUpon>SetupSpFnInvoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\GlobalSettings.aspx.cs">
+      <DependentUpon>GlobalSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\GlobalSettings.aspx.designer.cs">
+      <DependentUpon>GlobalSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillPurch.aspx.cs">
+      <DependentUpon>PrintInvoiceFullBillPurch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintInvoiceFullBillPurch.aspx.designer.cs">
+      <DependentUpon>PrintInvoiceFullBillPurch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\LockTransactions.aspx.cs">
+      <DependentUpon>LockTransactions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\LockTransactions.aspx.designer.cs">
+      <DependentUpon>LockTransactions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Days.aspx.cs">
+      <DependentUpon>Days.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Days.aspx.designer.cs">
+      <DependentUpon>Days.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Notifications.aspx.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Notifications.aspx.designer.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupRegionalMgrs.aspx.cs">
+      <DependentUpon>SetupRegionalMgrs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupRegionalMgrs.aspx.designer.cs">
+      <DependentUpon>SetupRegionalMgrs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportIndirectCosts.aspx.cs">
+      <DependentUpon>ImportIndirectCosts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportIndirectCosts.aspx.designer.cs">
+      <DependentUpon>ImportIndirectCosts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupRFSCustNums.aspx.cs">
+      <DependentUpon>SetupRFSCustNums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupRFSCustNums.aspx.designer.cs">
+      <DependentUpon>SetupRFSCustNums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\RMAdjustments.aspx.cs">
+      <DependentUpon>RMAdjustments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\RMAdjustments.aspx.designer.cs">
+      <DependentUpon>RMAdjustments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\CostPerMealInvoices.aspx.cs">
+      <DependentUpon>CostPerMealInvoices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\CostPerMealInvoices.aspx.designer.cs">
+      <DependentUpon>CostPerMealInvoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setup\SetupTaxRates.aspx.cs">
+      <DependentUpon>SetupTaxRates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setup\SetupTaxRates.aspx.designer.cs">
+      <DependentUpon>SetupTaxRates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print\PrintPurchasesSummary.aspx.cs">
+      <DependentUpon>PrintPurchasesSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print\PrintPurchasesSummary.aspx.designer.cs">
+      <DependentUpon>PrintPurchasesSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImportExtraChef.aspx.cs">
+      <DependentUpon>ImportExtraChef.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utilities\ImportExtraChef.aspx.designer.cs">
+      <DependentUpon>ImportExtraChef.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EOMChecklist.aspx.cs">
+      <DependentUpon>EOMChecklist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EOMChecklist.aspx.designer.cs">
+      <DependentUpon>EOMChecklist.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="UploadFile\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.7\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.7\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.7\analyzers\dotnet\cs\Humanizer.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.7\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.7\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.7\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.7\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.7\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.7\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59035</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59035/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.7\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.7\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.7\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeQuality.Analyzers.2.9.7\build\Microsoft.CodeQuality.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.7\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetCore.Analyzers.2.9.7\build\Microsoft.NetCore.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.7\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetFramework.Analyzers.2.9.7\build\Microsoft.NetFramework.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets" Condition="Exists('..\packages\Microsoft.CodeAnalysis.NetAnalyzers.6.0.0\build\Microsoft.CodeAnalysis.NetAnalyzers.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
