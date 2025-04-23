@@ -1,0 +1,415 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="Paperwork.SiteMaster" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Paperwork</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <%-- 1/17/2020 updated link for FontAwesome from 5.1 to 5.12 --%>
+    <%-- 1/17/2020 Kit created below specifically for Paperwork. Always has the latest version --%>
+    <%--<script src="https://kit.fontawesome.com/1526bde3ce.js" crossorigin="anonymous"></script>--%>
+    <%-- Received notice the we were exceeding views for the hosted fontawesome kit. Below is the reference to locally installed version --%>
+    <link href="~/Content/fontawesome/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="MainForm" runat="server">
+        <asp:ScriptManager runat="server" AsyncPostBackTimeout="56000">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="jquery.ui.combined" /><%-- JQuery UI Needs to be after bootstrap for dialog close icon to appear--%> 
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+            
+        </asp:ScriptManager>
+        <script type="text/javascript">
+            // Adds the save/delete/error feedback code to all pages. Need to add the div with id "alert_container" and call from page code.
+            function ShowMessageIcon(messageString, messagetype) {
+                var cssclass;
+                var messageIcon;
+                switch (messagetype) {
+                    case 'Success':
+                        cssclass = 'alert-success';
+                        messageIcon = "<i class='fas fa-check-circle' style='color:green;'></i>";
+                        break;
+                    case 'Error':
+                        cssclass = 'alert-danger';
+                        messageIcon = "<i class='fas fa-exclamation-circle' style='color: darkred;'></i>";
+                        break;
+                    case 'Warning':
+                        cssclass = 'alert-warning';
+                        messageIcon = "<i class='fas fa-exclamation-triangle' style='color: saddlebrown;'></i>";
+                        break;
+                    default:
+                        cssclass = 'alert-info';
+                        messageIcon = "<i class='fas fa-info-circle' style='color: darkblue;'></i>";
+                }
+                $('#alert_container').append('<div id="alert_div" style="display:inline; padding:3px;" class="alert alert-dismissible fade show '
+                    + cssclass + '"><a href="#" data-dismiss="alert" >'
+                    + '<span>' + messageIcon + ' ' + messageString + '</span></a></div>');
+                window.setTimeout(function () { $('#alert_div').alert('close'); }, 3000);
+            };
+
+            // the following allows you to specify a specific alert container if more than one is on the page
+            function ShowMessageByName(message, messagetype, containerName, duration) {
+                var cssclass;
+                var msgduration = duration;
+                switch (messagetype) {
+                    case 'Success':
+                        cssclass = 'alert-success';
+                        break;
+                    case 'Error':
+                        cssclass = 'alert-danger';
+                        break;
+                    case 'Warning':
+                        cssclass = 'alert-warning';
+                        break;
+                    default:
+                        cssclass = 'alert-info';
+                }
+                $('#' + containerName).append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-dismissible fade show '
+                    + cssclass + '"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><a href="#" data-dismiss="alert" ><strong>'
+                    + messagetype + '!</strong> <span>' + message + '</span></a></div>');
+                window.setTimeout(function () { $('#alert_div').alert('close'); }, msgduration);
+            }
+
+            // Code to call the Jquery UI Dialog box from any page
+            function ShowPopup(titleString, message, messagetype) {
+                $(function () {
+                    switch (messagetype) {
+                        case 'Success':
+                            cssclass = 'alert-success';
+                            break;
+                        case 'Error':
+                            cssclass = 'alert-danger';
+                            break;
+                        case 'Warning':
+                            cssclass = 'alert-warning';
+                            break;
+                        default:
+                            cssclass = 'alert-info';
+                    }
+                    $("#dialogBox").html(message);
+                    $("#dialogBox").dialog({
+                        title: titleString,
+                        dialogClass: cssclass,
+                        
+                        buttons: {
+                            Close: function () {
+                                $(this).dialog('close');
+                            }
+                        },
+                        modal: true,
+                        show: {
+                            effect: 'blind',
+                            duration: 200
+                        },
+                        hide: {
+                            effect: 'blind',
+                            duration: 200
+                        },
+                        create: function () {
+                            $(this).closest(".ui-dialog")
+                                .find(".ui-dialog-buttonpane") // the first button
+                                .addClass(cssclass);
+                        },
+                        width: 400
+                    });
+                });
+            };
+        </script>
+        <!--navbar navbar-inverse navbar-fixed-top-->
+        
+        <nav runat="server" id="PaperworkNav" class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top ">
+            <div class="container">
+            
+                <a class="navbar-brand" runat="server" href="~/">
+                    <asp:Image runat="server" ID="logo" ImageUrl="~/Images/NutLogo.png" />
+                    <asp:Image runat="server" ID="logoFMS" ImageUrl="~/Images/FMSLogoTiny.png" Visible="false" />
+                    <asp:Label ID="LabelPPWTrainSFSPIndicator" runat="server"></asp:Label>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div id="navbarColor01" class="navbar-collapse collapse">
+                    
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTrx" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Transactions
+                            </a>
+                            
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="Purchases.aspx" runat="server" id="link_Purchases" >Transmittal Entry</a>
+                                <a class="dropdown-item" href="SalesEntry.aspx" runat="server" id="link_SalesEntry" >Sales</a>
+                                <a class="dropdown-item" href="DistrictPayrollEntry.aspx" runat="server" id="link_DistrictPayrollEntry">District Payroll</a>
+                                <a class="dropdown-item" href="InventoryEntry.aspx" runat="server" id="link_InventoryEntry">Inventory Totals</a>
+                                <a class="dropdown-item" href="InventoryVerificationSFSP.aspx" runat="server" id="link_InventoryVerificationSFSP">Inventory Verification SFSP</a>
+                                <a class="dropdown-item" href="OtherSales.aspx" runat="server" id="link_OtherSales">Enter Indirect Costs</a>
+                                <a class="dropdown-item" href="SpecialFunctionsEntry.aspx" runat="server" id="link_SpecialFunctionsEntry">Special Functions</a>
+                                <a class="dropdown-item" href="Days.aspx" runat="server" id="link_Days">View/Modify Days</a>
+                                <a class="dropdown-item" href="Notifications.aspx" runat="server" id="link_Notifications">Notifications</a>
+                                <a class="dropdown-item" href="EOMChecklist.aspx" runat="server" id="link_EOMChecklist">EOM Checklist</a>
+                                <a class="dropdown-item" href="MenuAnalysisEntry.aspx" runat="server" id="link_MenuAnalysisEntry">Menu Analysis</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a runat="server" class="dropdown-item" href="~/Print/PrintBudgetReport" id="link_PrintBudgetReport">Budget Report</a>
+                                <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                    <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Closing Reports</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintOperatingReportAll" id="link_PrintOperatingReport" >Operating Report</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintOperatingStatistics" id="link_PrintOperatingStatistics">Operating Statistics</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintCompanyFoodCost" id="link_PrintCompanyFoodCost">Companywide Food Cost</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintCompanyConsolMenu" id="link_PrintCompConsolMenu">Menu Consolidation</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintUSDACover" id="link_PrintUSDACover">USDA Cover Sheet</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintDetailedProfitCPM" id="link_PrintDetailedProfitCPM">Detailed Profit Rpt CPM</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintDetailedProfitFB" id="link_PrintDetailedProfitFB">Detailed Profit Rpt FB</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintEOMChecklist" id="link_PrintEOMChecklist">EOM Checklist</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintInventoryDistTotals" id="link_PrintInventoryDistTotals">Inventory Change Dists</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintInventoryVerification" id="link_PrintInventoryVerification">Inventory Verification SFSP</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintPurchasesSummary" id="link_PrintPurchasesSummary">Purchases Summary</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintReinhartCredits" id="link_PrintReinhartCredits">Reinhart Credits</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintUsageSummary" id="link_PrintUsageSummary">Usage Summary</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintUSDACPM" id="link_PrintUSDACPM">USDA CPM Consolidated</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                    <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Edit Check Reports</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintEditCheckBySchool" id="link_PrintEditCheckBySchool">Edit Check by School</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintEditCheckSummary" id="link_PrintEditCheckSummary">Edit Check Summary</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintCN6" id="link_PrintCN6">CN-6 (OHIO)</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintCN7" id="link_PrintCN7">CN-7 (OHIO)</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <a runat="server" class="dropdown-item" href="~/Print/PrintLunchClaim" id="link_PrintLunchClaim">Lunch Claim Worksheet</a>
+                                <%--<a runat="server" class="dropdown-item" href="~/Print/PrintMMB">MMB</a>--%>
+                                <a runat="server" class="dropdown-item" href="~/Print/PrintNotifications" id="link_PrintNotifications">Notifications</a>
+                                
+                                <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                    <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Payroll Reports</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintPayroll" id="link_PrintPayroll">Payroll Report</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintPayrollHealth" id="link_PrintPayrollHealth">Payroll Health Report</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintPayrollDetail" id="link_PrintPayrollDetail">TNG Payroll Report</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                
+                                <div id="DivRMEOMReport" runat="server">
+                                    <a runat="server" class="dropdown-item" href="~/Print/PrintRMEOM" id="link_PrintRMEOM">RM EOM Report</a>
+                                    <a runat="server" class="dropdown-item" href="~/RMEOMComments" id="link_RMEOMComments">RM EOM Explanations</a>
+                                </div>
+
+                                <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                    <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Sales Reports</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSales" id="link_PrintSales">Sales - School</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSalesRevisions" id="link_PrintSalesRevisions">Sales - School Revisions</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSalesRevisionsDetail" id="link_PrintSalesRevisionsDetail">Sales - School Rev. Detail</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSalesDistrict" id="link_PrintSalesDistrict">Sales - District</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSnackSales" id="link_PrintSnackSales">Snacks</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSalesAdultLunch" id="link_PrintSalesAdultLunch">Sales - Adult Lunch</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSalesDinner" id="link_PrintSalesDinner">Sales - Dinner</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintSalesNutrForLife" id="link_PrintSalesNutrForLife">Sales - Nutr For Life</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div id="DivSpFnReports" runat="server">
+                                    <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                        <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Special Function Rpts</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a runat="server" class="dropdown-item" href="~/Print/PrintSpecialFuncInvoices" id="link_PrintSpecialFuncInvoices">Special Functions Invoices</a></li>
+                                                <li><a runat="server" class="dropdown-item" href="~/Print/PrintSpFnLedger" id="link_PrintSpFnLedger">Special Functions Ledger</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                    <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Transmittal Rpts</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintAddOnFeesInvoice" id="link_PrintAddOnFeesInvoice">Add-On Fees Invoice</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintTransmittals" id="link_PrintTransmittals">Transmittals</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintTransmittalsOther" id="link_PrintTransmittalsOther">Transmittals Other Costs</a></li>
+                                            <li><a runat="server" class="dropdown-item" href="~/Print/PrintOHCatTaxInv" id="link_PrintOHCatTaxInv">Ohio Cat Tax Invoices</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <a runat="server" class="dropdown-item" href="~/Print/PrintSummarySFSPDists" id="link_PrintSFSPDistsSummary">Summary SFSP Districts</a>
+                                
+                                <div id="MstrMgmtReports" runat="server">
+                                    <div class="dropdown-divider" ></div>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Utilities/CostPerMealInvoices" id="link_CostPerMealInvoices">Create CPM Invoices</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintInvoiceCostPerMeal" id="link_PrintInvoiceCostPerMeal">Print CPM Invoices</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintCPMInvoiceSummary" id="link_PrintCPMInvoiceSummary">CPM Invoice Summary</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintCPMPLReport" id="link_PrintCPMPLReport">Print CPM P&L Report</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintInvoiceFullBillPurch" id="link_PrintInvoiceFullBillPurch">Purch Invoice</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintInvoiceFullBillUsage" id="link_PrintInvoiceFullBillUsage">Usage Invoice</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintInvoicePacket" id="link_PrintInvoicePacket">Invoice Packet</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintInvoiceFullBillPurchwCPMFees" id="link_PrintInvoiceFullBillPurchwCPMFees">Purch Invoice w/CPM Fees</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintInvoiceFullBillUsagewCPMFees" id="link_PrintInvoiceFullBillUsagewCPMFees">Usage Invoice w/CPM Fees</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintFullBillSummary" id="link_PrintFullBillSummary">Full Bill Summary</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintSchoolInvAndFees" id="link_PrintSchoolInvAndFees">School Invoices and Fees</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintCOVIDCPMSales" id="link_PrintCOVIDCPMSales">COVID CPM Sales</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintDiscountsSummary" id="link_PrintDiscountsSummary">Discounts Summary</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintFFVDistInvoiceTotals" id="link_PrintFFVDistInvoiceTotals">FFV Dists Summary</a>
+                                    <a runat="server" class="dropdown-item" style="color:darkgreen;" href="~/Print/PrintSummaryReimVerif" id="link_PrintSummaryReimVerif">Reimb. Verifications Summary</a>
+                                </div>
+                                <div id="Divtest" runat="server"></div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSetup" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Setup
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <!--BEGIN SETUPS FOR ALL USERS-->
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupDistrictInfo" id="link_SetupDistrictInfo" >District Info</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupSchools" id="link_SetupSchools">Setup Schools</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupSchoolInfo" id="link_SetupSchoolInfo">Setup School Info</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupDistrictVendors" id="link_SetupDistrictVendors">Select Vendors</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupPaycodes" id="link_SetupPaycodes">Setup Paycodes</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupEmployees" id="link_SetupEmployees">Setup Employees</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupMenuAnalysisItems" id="link_SetupMenuAnalysisItems">Setup Menu Analysis Items</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupMilkDelivery" id="link_SetupMilkDelivery">Setup Milk Delivery</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupOtherSales" id="link_SetupOtherSales">Setup Indirect Costs</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupSpFnInvoices" id="link_SetupSpFnInvoices">Setup Sp. Function Invoices</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupSpFnOrganizations" id="link_SetupSpFnOrgs">Setup Sp. Fn. Organizations</a>
+                                <a runat="server" class="dropdown-item" href="~/Setup/SetupTransmittalOptions" id="link_SetupTransOpts">Setup Transmittal Options</a>
+                                <!--END   SETUPS FOR ALL USERS-->
+                                <!--BEGIN ADMIN ONLY MENUS-->
+                                <div id="MstrAdminSetup" runat="server" >
+                                    <div class="dropdown-divider"></div>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupProgramYear" id="link_SetupProgramYear">Setup Program Years</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupTaxRates" id="link_SetupTaxRates">Setup Tax Rates</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupDistricts" id="link_SetupDistricts">Setup Districts</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupDistrictsInvTerms" id="A1">Setup Dists Inv Terms</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupUsers" id="link_SetupUsers">Setup Users</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupMenuAnalysisLevels" id="link_SetupMenuAnalysisLevels">Setup Menu Analysis Lvls</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupProgramTypes" id="link_SetupProgramTypes">Setup Program Types</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupPurchOtherCats" id="link_SetupPurchOtherCats">Setup Purchase Other Cats</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupRegionalMgrs" id="link_SetupRegionalMgrs">Setup Regional Mgrs</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupGallikerCustNums" id="link_SetupGLKRCustNums">Setup Galliker Cust Nums</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupMorabitoCustNums" id="link_SetupMRBTOCustNums">Setup Morabito Cust Nums</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupRFSCustNums" id="link_SetupRFSCustNums">Setup Reinhart Cust Nums</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupVendorCustNums" id="link_SetupVendorCustNums">Setup Vendor Cust Nums</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupVPs" id="link_SetupVPs">Setup VPs</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/GlobalSettings" id="link_GlobalSettings">Global Settings</a>
+                                    <a runat="server" class="dropdown-item" style="color:crimson;" href="~/Setup/SetupEmail" id="link_EmailSettings">Email Settings</a>
+                                </div>
+                                <!--END ADMIN ONLY MENUS-->
+                            </div>
+                        </li>
+                        <li id="MstrAdminOfficeUtils1" runat="server" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUtil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Utilities
+                            </a>
+                            <div  class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                <div id="MstrUserOnlyUtils" runat="server" >
+                                    <a class="dropdown-item" href="~/Utilities/ImportPOS.aspx" runat="server" id="link_ImportPOSUsr" >Import - POS</a>
+                                </div>
+                                <div id="MstrAdminOfficeUtils" runat="server" >
+                                    <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                        <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Exports</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="~/Utilities/ExportFBPassThru.aspx" runat="server" id="link_ExportFBPassThru" >Export - FB Pass Thru</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ExportInvChange.aspx" runat="server" id="link_ExportInvChange" >Export - Inventory Change</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/PayablesExport.aspx" runat="server" id="link_PayablesExport" >Export - Payables</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                        <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Imports</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportAddonFees.aspx" runat="server" id="link_ImportAddonFees" >Import - Add-on Fees</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportExtraChef.aspx" runat="server" id="link_ImportExtraChef" >Import - ExtraChef Invoices</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportGalliker.aspx" runat="server" id="link_ImportGalliker" >Import - Galliker Milk</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportIndirectCosts.aspx" runat="server" id="link_ImportIndirectCosts" >Import - Indirect Costs</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportInsurance.aspx" runat="server" id="link_ImportInsurance" >Import - Insurance</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportMorabito.aspx" runat="server" id="link_ImportMorabito" >Import - Morabito</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportPayroll.aspx" runat="server" id="link_ImportPayroll" >Import - Payroll</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportPOS.aspx" runat="server" id="link_ImportPOS" >Import - POS</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportReinhartCredits.aspx" runat="server" id="link_ImportReinhartCredits" >Import - Reinhart Credits</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/ImportReinhart.aspx" runat="server" id="link_ImportReinhart" >Import - Reinhart Invoices</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-item" aria-labelledby="navbarDropdownMenuLink" style="list-style-type:none;">
+                                        <li class="dropdown-submenu"><a class="dropdown-item " href="#" style="padding-left:0px;">Invoice Updates</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="~/Utilities/InvoiceCredits.aspx" runat="server" id="link_InvoiceCredits" >FB Invoice Credits</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/RMAdjustments.aspx" runat="server" id="link_RMAdjustments" >FB Reim. Adjustments</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/FBPrepays.aspx" runat="server" id="link_FBPrepays" >FB Prepayments</a></li>
+                                                <li><a class="dropdown-item" href="~/Utilities/InvAdjustments.aspx" runat="server" id="link_InvAdj" >Inventory Adjustments</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <a class="dropdown-item" href="~/Utilities/LockTransactions.aspx" runat="server" id="link_LockTransactions" >Lock / Unlock Transactions</a>
+                                    <a class="dropdown-item" href="~/Utilities/PayrollAccruals.aspx" runat="server" id="link_PayrollAccruals" >Payroll Accruals</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="nav navbar-text navbar-right hidden-xs hidden-sm" style="font-size:smaller;margin-top:5px;margin-bottom:5px;">
+                        <asp:UpdatePanel ID="UpdatePanelMstrHdr" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <asp:LoginName runat="server" /><br /> <asp:Label ID="CurrDistrict" runat="server"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel> 
+                    </div>
+                </div>
+            </div>   
+        </nav>
+        <div id="DataSources">
+            <asp:SqlDataSource ID="SqlDataSourceMyDistrictsMstr" runat="server" ConnectionString="<%$ ConnectionStrings:connPaperwork %>" 
+                SelectCommand="SELECT DistrictID, RTRIM(DistrictName) + '-' + RTRIM(DistrictID) 'Desc'
+                FROM [District] WHERE DistrictID IN (SELECT DistrictID FROM [UserDistrictAccess] WHERE Userid=@UserID) OR (@AccessLevel NOT IN ('User'))
+                ORDER BY [DistrictName]">
+                <SelectParameters>
+                    <asp:SessionParameter Name="UserID" SessionField="CurrentUser" Type="String" />
+                    <asp:SessionParameter Name="AccessLevel" SessionField="AccessLevel" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSourceMyDistrictsMstrPY" runat="server" ConnectionString="<%$ ConnectionStrings:connPaperwork %>" 
+                SelectCommand="ActiveDistrictsListUser" SelectCommandType="StoredProcedure">
+                <SelectParameters>
+                    <asp:Parameter Name="ProgramYear" Type="String" />
+                    <asp:SessionParameter Name="UserID" SessionField="CurrentUser" Type="String" />
+                    <asp:SessionParameter Name="AccessLevel" SessionField="AccessLevel" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+        </div>
+        <div id="dialogBox" ></div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

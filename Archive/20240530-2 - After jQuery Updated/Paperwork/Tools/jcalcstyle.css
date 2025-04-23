@@ -1,0 +1,218 @@
+﻿@charset "UTF-8";
+/* CSS Document */
+
+/* Created the following class to encapsulate calc css instead of applying to whole page like original */
+.CalculatorClass * {
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+}
+.CalculatorClass body {
+    background-image: url(../images/wood-desk-top.jpg);
+    background-position: -50px 0;
+    background-repeat: no-repeat;
+    font: 25px "Arial Black", Arial, Sans-Serif;
+}
+.CalculatorClass #page-wrap {
+    width: 500px;
+    margin: 25px auto;
+}
+.CalculatorClass h1 {
+    font-size: 22px;
+    color: DodgerBlue;
+    text-shadow: 2px 2px 2px #ffffff;
+}
+
+.CalculatorClass p {
+    font: 18px Arial, Sans-Serif;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #000000;
+    padding-top: 5px;
+}
+
+.CalculatorClass a {
+    color: black;
+    text-decoration: none;
+    outline: none;
+}
+
+.CalculatorClass img {
+    margin-top: 5px;
+}
+
+.CalculatorClass #titleSection {
+    margin: 10px 0 0 10px;
+}
+
+#calculator {
+    width: 266px;
+    height: 400px;
+    background-color: transparent;
+    position: absolute;
+    display: none;
+    top: 20%;
+    left: 15px;
+}
+
+.numpad {
+    width: 202px;
+    height: 270px;
+    background-color: rgba(201,201,201,.75);
+    top: 67px;
+    left: 15px;
+    position: absolute;
+    border: solid #FFC100;
+    border-radius: 0px 0px 25px 25px;
+}
+
+.CalculatorClass #display {
+    background: rgba(181,238, 249, 0.95);
+    border: solid #FFC100;
+    border-radius: 25px 25px 0 0;
+    position:absolute;
+    top: 15px;
+    left: 15px;
+    width: 202px;
+    text-align: right;
+    padding-right: 5px;
+    font: 35px "Arial Black", Arial, Sans-Serif;
+}
+
+.num-button     { 
+    width: 40px; 
+    height: 40px; 
+    padding: 3px 0 0 0; 
+    text-align: center;  
+    vertical-align:middle;
+    border-radius: 50%;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, gray, white);
+    background-image: -moz-radial-gradient(45px 45px, circle cover, gray, white);
+    background-image: radial-gradient(45px 45px, circle cover, gray, white);
+    position: absolute; 
+    display: block; 
+    font-weight:bold;
+    font-size:larger;
+}
+.zero-button {
+    width: 90px;
+    height: 40px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    border-radius: 25px;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, gray, white);
+    background-image: -moz-radial-gradient(45px 45px, circle cover, gray, white);
+    background-image: radial-gradient(45px 45px, circle cover, gray, white);
+    position: absolute;
+    display: block;
+    font-weight: bold;
+    font-size: larger;
+}
+.clear-button {
+    width: 40px;
+    height: 40px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    border-radius: 50%;
+    color: firebrick;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, gray, white);
+    background-image: -moz-radial-gradient(45px 45px, circle cover, gray, white);
+    background-image: radial-gradient(45px 45px, circle cover, gray, white);
+    position: absolute;
+    display: block;
+    font-weight: bold;
+    font-size: larger;
+}
+.function-button {
+    width: 40px;
+    height: 40px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    border-radius: 50%;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, orange, yellow);
+    background-image: -moz-radial-gradient(45px 45px, circle cover, orange, yellow);
+    background-image: radial-gradient(45px 45px, circle cover, orange, yellow);
+    position: absolute;
+    display: block;
+    font-weight: bold;
+    font-size: larger;
+}
+.plusminus-button {
+    width: 40px;
+    height: 40px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    border-radius: 50%;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, gray, lightskyblue);
+    background-image: -moz-radial-gradient(45px 45px, circle cover, gray, lightskyblue);
+    background-image: radial-gradient(45px 45px, circle cover, gray, lightskyblue);
+    position: absolute;
+    display: block;
+    font-weight: bold;
+    font-size: larger;
+}
+.percent-button {
+    width: 40px;
+    height: 40px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    border-radius: 50%;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, gray, lightskyblue);
+    background-image: -moz-radial-gradient(45px 45px, circle cover, gray, lightskyblue);
+    background-image: radial-gradient(45px 45px, circle cover, gray, lightskyblue);
+    position: absolute;
+    display: block;
+    font-weight: bold;
+    font-size: larger;
+} 
+
+.function-button:active, 
+.pendingFunction    { background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange); }
+
+.equals-button {
+    width: 40px;
+    height: 40px;
+    top: 284px;
+    left: 176px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    border-radius: 50%;
+    background-image: -webkit-radial-gradient(45px 45px, circle cover, orange, yellow);
+    background-image: -moz-radial-gradient(45px 45px, circle cover, orange, yellow);
+    background-image: radial-gradient(45px 45px, circle cover, orange, yellow);
+    position: absolute;
+    display: block;
+    font-weight: bold;
+    font-size: larger;
+} 
+
+.seven              { top: 131px; left: 22px; }
+.eight              { top: 131px; left: 72px; }
+.nine               { top: 131px; left: 125px; }
+
+.four				{ top: 182px; left: 22px; }
+.five				{ top: 182px; left: 72px; }
+.six				{ top: 182px; left: 125px; }
+
+.one				{ top: 233px; left: 22px; }
+.two				{ top: 233px; left: 72px; }
+.three				{ top: 233px; left: 125px; }
+
+.zero				{ top: 284px; left: 22px; }
+.dot				{ top: 284px; left: 125px; }
+.clear				{ top: 80px; left: 22px; }
+
+.divide				{ top: 80px; left: 176px; }
+.multiply			{ top: 131px; left: 176px; }
+.add		    	{ top: 182px; left: 176px; }
+.subtract 			{ top: 233px; left: 176px; }
+
+.percent			{ top: 80px; left: 125px; }
+.plusminus			{ top: 80px; left: 73px; }
+
+#closer				{ font-size:12px; color:white; width:20px; height:20px; border-radius:50%; background:black; border:inset; position: absolute; top: 9px; left: 7px; text-align:center; }
+
+#notePad { width: 400px; font-family: 'Rock Salt', cursive; position:absolute; top: 185px; left: 800px; -webkit-transform:rotate(12deg); -moz-transform: rotate(12deg); -ms-transform: rotate(12deg); z-index: -1; }
+
+
+
+

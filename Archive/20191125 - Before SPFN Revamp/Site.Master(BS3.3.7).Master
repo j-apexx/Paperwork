@@ -1,0 +1,103 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="Paperwork.SiteMaster" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Paperwork</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="https://kit.fontawesome.com/1526bde3ce.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="~/" runat="server"><asp:Image runat="server" ID="logo" ImageUrl="~/Images/NutLogo.png" /></a>
+                    <a class="navbar-brand" runat="server" href="~/">Paperwork</a>
+
+                </div>
+                <div class="navbar-collapse collapse">
+                    
+                    <ul class="nav navbar-nav">
+                        <li><a href="Purchases.aspx" runat="server">Purchases</a></li>
+                        <li><a href="RecapEntry.aspx" runat="server">Recaps</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" href="~/Print/PrintRecaps">School Recaps</a></li>
+                                <li><a runat="server" href="~/Print/PrintRecapsDistrict">District Recaps</a></li>
+                                <li><a runat="server" href="~/Print/PrintTransmittals">Transmittals</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Setup
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!--BEGIN SETUPS FOR ALL USERS-->
+                                <li><a href="~/Setup/SetupDistrictInfo.aspx" runat="server">District Info</a></li>
+                                <li><a href="~/Setup/SetupSchools.aspx" runat="server">Setup Schools</a></li>
+                                <li><a href="~/Setup/SetupSchoolInfo.aspx" runat="server">Setup School Info</a></li>
+                                <li><a href="~/Setup/SetupDistrictVendors.aspx" runat="server">Select Vendors</a></li>
+                                <!--END   SETUPS FOR ALL USERS-->
+                                <!--BEGIN ADMIN ONLY MENUS-->
+                                <li class="divider"<%: Session["AccessLevel"].ToString()=="Admin"? " " : "hidden='hidden'" %> ></li>
+                                <li class="dropdown-submenu" <%: Session["AccessLevel"].ToString()=="Admin"? " " : "hidden='hidden'" %> >
+                                    <a tabindex="-1" href="#">Admin Setups</a>
+                                        <ul class="dropdown-menu">
+                                            <li <%: Session["AccessLevel"].ToString()=="Admin"? " " : "hidden='hidden'" %>><a runat="server" href="~/Setup/SetupProgramYear">Setup Program Years</a></li>
+                                            <li <%: Session["AccessLevel"].ToString()=="Admin"? " " : "hidden='hidden'" %>><a runat="server" href="~/Setup/SetupDistricts">Setup Districts</a></li>
+                                            <li <%: Session["AccessLevel"].ToString()=="Admin"? " " : "hidden='hidden'" %>><a runat="server" href="~/Setup/SetupUsers">Setup Users</a></li>
+                                        </ul>
+                                </li>
+                                <!--END ADMIN ONLY MENUS-->
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="nav navbar-text navbar-right hidden-xs hidden-sm" style="font-size:smaller;margin-top:5px;margin-bottom:5px;">
+                        <asp:LoginName runat="server" /><br /> <asp:Label ID="CurrDistrict" runat="server"></asp:Label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

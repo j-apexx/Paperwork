@@ -1,0 +1,162 @@
+﻿using Microsoft.Reporting.WebForms;
+using System;
+using System.Configuration;
+using System.Reflection;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Paperwork
+{
+    public partial class PrintTransmittals : Paperwork_Global
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //ProgramYear not set
+            if (Session["ProgramYear"] == null)
+                Response.Redirect("~/Default.aspx");
+
+            //District Session ID not set
+            if (Session["CurrentDistrict"] == null || Session["CurrentDistrict"].ToString() == string.Empty)
+                Response.Redirect("~/Default.aspx");
+
+            if (!IsPostBack)
+            {
+                //Check for custom security
+                string className = MethodBase.GetCurrentMethod().DeclaringType.Name;
+                bool accessExplicitlyGranted = false;
+                bool accessExplicitlyDenied = false;
+                CheckCustomAccess(className, ref accessExplicitlyGranted, ref accessExplicitlyDenied);
+
+                if (accessExplicitlyDenied == true)
+                    Response.Redirect("~/Default.aspx");
+
+                DDLProgramYears.DataBind();
+                if (DDLProgramYears.Items.Count == 0)
+                    Response.Redirect("~/default.aspx");
+                else
+                {
+                    if (DDLProgramYears.Items.FindByValue(Session["ProgramYear"].ToString()) != null)
+                        DDLProgramYears.SelectedValue = Session["ProgramYear"].ToString();
+                    else
+                        DDLProgramYears.SelectedIndex = 0;
+                }
+
+                //TextBoxStartDate.Text = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).AddMonths(-1).ToShortDateString();
+                //TextBoxEndDate.Text = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddDays(-1)).ToShortDateString();
+                //Tom wants the default dates to be the next friday
+                //Friday=5
+                DateTime NextFriday = DateTime.Now.AddDays(5 - (int)DateTime.Now.DayOfWeek);
+
+                TextBoxStartDate.Text = NextFriday.ToShortDateString();
+                TextBoxEndDate.Text = NextFriday.ToShortDateString();
+
+                //DDLProgramTypes.DataBind();
+                CheckBoxListProgTypes.DataBind();
+
+                //Update the SSRS Url based on settings in Global Settings
+                string SSRSURL = GetGlobalSettingString("SSRS_URL");
+                string SSRSBaseFolder = ConfigurationManager.AppSettings["SSRS_BaseFolder"];
+                Uri SSRSUri = new Uri(SSRSURL);
+                ReportViewer1.ServerReport.ReportServerUrl = SSRSUri;
+                ReportViewer1.ServerReport.ReportPath = SSRSBaseFolder + ReportViewer1.ServerReport.ReportPath;
+
+                UpdateReportParams();
+            }
+            else
+            {
+                Page.Validate();
+            }
+        }
+
+        protected void UpdateReportParams()
+        {
+
+            //prevent invalid dates from crashing the report
+            if (DateTime.TryParse(TextBoxStartDate.Text, out DateTime testDate) == false)
+                return;
+            if (DateTime.TryParse(TextBoxEndDate.Text, out DateTime testDate2) == false)
+                return;
+
+            ReportParameter paramProgYear = new ReportParameter("ProgramYear", DDLProgramYears.SelectedValue);
+            ReportParameter paramDistID = new ReportParameter("DistrictID", Session["CurrentDistrict"].ToString());
+            ReportParameter paramStartDate = new ReportParameter("PostDateBeginning", TextBoxStartDate.Text);
+            ReportParameter paramEndDate = new ReportParameter("PostDateEnding", TextBoxEndDate.Text);
+            ReportParameter paramGroupByPostDate = new ReportParameter("GroupByPostDate", CBGroupByPostDate.Checked ? "true" : "false");
+            ReportParameter paramProgType = new ReportParameter("ProgramType");
+            ReportParameter paramSummarizeMiles = new ReportParameter("SummarizeMileage", CBSummarizeMiles.Checked ? "true" : "false");
+            ReportParameter paramReportOptions = new ReportParameter("ReportOptions", DDLReportOptions.SelectedValue);
+
+            foreach (ListItem li in CheckBoxListProgTypes.Items)
+            {
+                if (li.Selected)
+                    paramProgType.Values.Add(li.Value);
+            }
+
+            if (paramProgType.Values.Count == 0)
+                paramProgType.Values.Add("XXXX");
+
+            try
+            {
+                ReportViewer1.ServerReport.SetParameters(new ReportParameter[] { paramProgYear, paramDistID, paramStartDate, paramEndDate, paramGroupByPostDate, paramProgType, paramSummarizeMiles, paramReportOptions });
+                ReportViewer1.ServerReport.Refresh();
+            }
+            catch { }
+
+            ReportViewer1.ShowPrintButton = true;
+            //ReportViewer1.ShowParameterPrompts = true;
+        }
+
+        //When month is changed - reopen the calendar
+        protected void TextBoxDate_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tbDate = (TextBox)sender;
+            NormalizeSimplifiedDate(ref tbDate);
+
+            UpdateReportParams();
+        }
+
+        protected void CBGroupByPostDate_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateReportParams();
+        }
+
+        protected void DDLProgramYears_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["ProgramYear"] = DDLProgramYears.SelectedValue;
+            UpdateReportParams();
+        }
+
+        protected void DDLProgramTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateReportParams();
+        }
+
+        protected void CheckBoxListProgTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateReportParams();
+        }
+
+        protected void CheckBoxListProgTypes_DataBound(object sender, EventArgs e)
+        {
+            CheckBoxList cbList = (CheckBoxList)sender;
+            foreach (ListItem li in cbList.Items)
+            {
+                if (li.Value.ToUpper() == "SCHOOL YEAR" || li.Value.ToUpper() == "COVID")
+                {
+                    cbList.Items[cbList.Items.IndexOf(li)].Selected = true;
+                }
+            }
+
+        }
+
+        protected void CBSummarizeMiles_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateReportParams();
+        }
+
+        protected void DDLReportOptions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateReportParams();
+        }
+    }
+}
