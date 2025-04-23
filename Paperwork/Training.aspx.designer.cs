@@ -24,6 +24,24 @@ namespace Paperwork
         protected global::System.Web.UI.WebControls.HiddenField HFTrainingID;
 
         /// <summary>
+        /// HFAttendeeID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFAttendeeID;
+
+        /// <summary>
+        /// HFAttendeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFAttendeeName;
+
+        /// <summary>
         /// DDLProgramYears control.
         /// </summary>
         /// <remarks>
@@ -31,15 +49,6 @@ namespace Paperwork
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DDLProgramYears;
-
-        /// <summary>
-        /// LinkButtonNewInvoice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonNewInvoice;
 
         /// <summary>
         /// GridViewTrainings control.
@@ -60,15 +69,6 @@ namespace Paperwork
         protected global::System.Web.UI.UpdatePanel UpdatePanelTrainings;
 
         /// <summary>
-        /// ISave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ISave;
-
-        /// <summary>
         /// FormViewSpFnOrg control.
         /// </summary>
         /// <remarks>
@@ -76,6 +76,15 @@ namespace Paperwork
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FormView FormViewSpFnOrg;
+
+        /// <summary>
+        /// GridViewTrainingAttendees control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewTrainingAttendees;
 
         /// <summary>
         /// SqlDataSourceProgramYears control.
@@ -94,6 +103,15 @@ namespace Paperwork
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceTrainHdrsList;
+
+        /// <summary>
+        /// SqlDataSourceTrainAttendeesList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceTrainAttendeesList;
 
         /// <summary>
         /// SqlDataSourceTrainHdr control.

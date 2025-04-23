@@ -163,7 +163,69 @@ namespace Paperwork
         {
             if (e.Exception == null)
             {
-                GridViewTrainings.DataBind(); // Refresh the grid
+                //GridViewTrainings.DataBind(); // Refresh the grid
+            }
+        }
+
+        protected void SqlDataSourceTrainAttendeesListDeleted(object sender, SqlDataSourceStatusEventArgs e)
+        {
+            if (e.Exception == null)
+            {
+                //GridViewTrainings.DataBind(); // Refresh the grid
+            }
+        }
+
+        protected void SqlDataSourceAttendees_Inserting(object sender, SqlDataSourceCommandEventArgs e)
+        {
+            TextBox textBoxAttendeeName;
+            if(GridViewTrainingAttendees.FooterRow != null)
+            {
+                textBoxAttendeeName = (TextBox)GridViewTrainingAttendees.FooterRow.FindControl("TextBoxAttendeeName");
+            }
+            else
+            {
+                textBoxAttendeeName = (TextBox)FindControlRecursive(GridViewTrainingAttendees, "TextBoxAttendeeNameInEmpty");
+            }
+
+            if (textBoxAttendeeName.Text.Length == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+            e.Command.Parameters["@AttendeeName"].Value = textBoxAttendeeName.Text;
+        }
+
+        protected void SqlDataSourceAttendees_Updating(object sender, SqlDataSourceCommandEventArgs e)
+        {
+            int index = GridViewTrainingAttendees.EditIndex;
+            GridViewRow row = GridViewTrainingAttendees.Rows[index];
+            TextBox textBoxAttendeeName = (TextBox)row.FindControl("TextBoxEAttendeeName");
+            e.Command.Parameters["@AttendeeName"].Value = textBoxAttendeeName.Text;
+        }
+
+        protected void GridViewAttendees_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Insert" && Page.IsValid)
+            {
+                try
+                {
+                    SqlDataSourceTrainAttendeesList.Insert();
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Message.IndexOf("duplicate key") >= 0)
+                    {
+                        ShowDialog("SQL Error", MessageType.Error, "Duplicate record - you cannot insert another record with the same date.", "");
+                    }
+                    else
+                    {
+                        ShowDialog("SQL Error", MessageType.Error, "A database error occurred.", ex.Message);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowDialog("Error", MessageType.Error, "An error occurred.", ex.Message);
+                }
             }
         }
 
@@ -189,6 +251,7 @@ namespace Paperwork
                 }
             }
         }
+
         protected void SqlDataSourceTrainHdrsListDeleting(object sender, SqlDataSourceCommandEventArgs e)
         {
             var programYear = e.Command.Parameters["@ProgramYear"].Value;
@@ -294,13 +357,25 @@ namespace Paperwork
             }
             return customers;
         }
+
         protected void GridviewClickable_RowDatabound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(
-                    GridViewTrainings, "Select$" + e.Row.RowIndex);
+                for (int i = 0; i < e.Row.Cells.Count - 1; i++)
+                {
+                    e.Row.Cells[i].Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(
+                        GridViewTrainings, "Select$" + e.Row.RowIndex);
+                }
 
+                e.Row.Attributes["style"] = "cursor:pointer";
+            }
+        }
+
+        protected void GridviewTrainingAttendeesClickable_RowDatabound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
                 e.Row.Attributes["style"] = "cursor:pointer";
             }
         }
@@ -347,76 +422,71 @@ namespace Paperwork
             string UpdateInvoiceQuery;
             UpdateInvoiceQuery = "UPDATE TrainingHDR SET TrainingTitle=@TrainingTitle, TrainingDescription = @TrainingDescription, " +
                 "  Location = @Location, TrainerName = @TrainerName, TrainingTime = @TrainingTime, " +
-                "  TrainingDate = " + DateTraining.Date.ToShortDateString() + " "+
+                "  TrainingDate = '" + DateTraining.Date.ToShortDateString() + "' " +
                 " WHERE ProgramYear=@ProgramYear AND DistrictID=@DistrictID AND TrainingID=@TrainingID ";
 
 
             using (SqlCommand cmd2 = new SqlCommand(UpdateInvoiceQuery, dbConnection))
             {
-                //SqlParameter dbParam_ProgYear2 = new SqlParameter();
-                //dbParam_ProgYear2.ParameterName = "@ProgramYear";
-                //dbParam_ProgYear2.Value = DDLProgramYears.SelectedValue;
-                //dbParam_ProgYear2.DbType = System.Data.DbType.StringFixedLength;
-                //cmd2.Parameters.Add(dbParam_ProgYear2);
+                SqlParameter dbParam_ProgYear2 = new SqlParameter();
+                dbParam_ProgYear2.ParameterName = "@ProgramYear";
+                dbParam_ProgYear2.Value = DDLProgramYears.SelectedValue;
+                dbParam_ProgYear2.DbType = System.Data.DbType.StringFixedLength;
+                cmd2.Parameters.Add(dbParam_ProgYear2);
 
-                //SqlParameter dbParam_DistID2 = new SqlParameter();
-                //dbParam_DistID2.ParameterName = "@DistrictID";
-                //dbParam_DistID2.Value = Session["CurrentDistrict"].ToString();
-                //dbParam_DistID2.DbType = System.Data.DbType.StringFixedLength;
-                //cmd2.Parameters.Add(dbParam_DistID2);
+                SqlParameter dbParam_DistID2 = new SqlParameter();
+                dbParam_DistID2.ParameterName = "@DistrictID";
+                dbParam_DistID2.Value = Session["CurrentDistrict"].ToString();
+                dbParam_DistID2.DbType = System.Data.DbType.StringFixedLength;
+                cmd2.Parameters.Add(dbParam_DistID2);
 
-                //SqlParameter dbParam_InvoiceNum = new SqlParameter();
-                //dbParam_InvoiceNum.ParameterName = "@TrainingID";
-                //dbParam_InvoiceNum.Value = HFTrainingID.Value;
-                //dbParam_InvoiceNum.DbType = System.Data.DbType.StringFixedLength;
-                //cmd2.Parameters.Add(dbParam_InvoiceNum);
+                SqlParameter dbParam_InvoiceNum = new SqlParameter();
+                dbParam_InvoiceNum.ParameterName = "@TrainingID";
+                dbParam_InvoiceNum.Value = HFTrainingID.Value;
+                dbParam_InvoiceNum.DbType = System.Data.DbType.StringFixedLength;
+                cmd2.Parameters.Add(dbParam_InvoiceNum);
 
-                //SqlParameter dbParam_Title = new SqlParameter();
-                //dbParam_Title.ParameterName = "@TrainingTitle";
-                //dbParam_Title.Value = TrainingTitle.Text;
-                //dbParam_Title.DbType = System.Data.DbType.StringFixedLength;
-                //cmd2.Parameters.Add(dbParam_Title);
+                SqlParameter dbParam_Title = new SqlParameter();
+                dbParam_Title.ParameterName = "@TrainingTitle";
+                dbParam_Title.Value = TrainingTitle.Text;
+                dbParam_Title.DbType = System.Data.DbType.StringFixedLength;
+                cmd2.Parameters.Add(dbParam_Title);
 
-                //SqlParameter dbParam_Desc = new SqlParameter();
-                //dbParam_Desc.ParameterName = "@TrainingDescription";
-                //dbParam_Desc.Value = TrainingDescription.Text;
-                //dbParam_Desc.DbType = System.Data.DbType.StringFixedLength;
-                //cmd2.Parameters.Add(dbParam_Desc);
+                SqlParameter dbParam_Desc = new SqlParameter();
+                dbParam_Desc.ParameterName = "@TrainingDescription";
+                dbParam_Desc.Value = TrainingDescription.Text;
+                dbParam_Desc.DbType = System.Data.DbType.StringFixedLength;
+                cmd2.Parameters.Add(dbParam_Desc);
 
-                //if (DateTime.TryParse(TrainingDate.Text, out DateTime DateTraining) == false)
-                //    DateTraining = new DateTime(1900, 01, 01);
+                SqlParameter dbParam_Time = new SqlParameter();
+                dbParam_Time.ParameterName = "@TrainingTime";
+                dbParam_Time.Value = TrainingTime.Text;
+                dbParam_Time.DbType = System.Data.DbType.Time;
+                cmd2.Parameters.Add(dbParam_Time);
 
-               
-                //SqlParameter dbParam_Date= new SqlParameter();
-                //dbParam_Date.ParameterName = "@TrainingDate";
-                //dbParam_Date.Value = DateTraining.Date;
-                //dbParam_Date.DbType = System.Data.DbType.Date;
-                //cmd2.Parameters.Add(dbParam_Date);
+                SqlParameter dbParam_Name = new SqlParameter();
+                dbParam_Name.ParameterName = "@TrainerName";
+                dbParam_Name.Value = TrainerName.Text;
+                dbParam_Name.DbType = System.Data.DbType.StringFixedLength;
+                cmd2.Parameters.Add(dbParam_Name);
 
-                //SqlParameter dbParam_Time = new SqlParameter();
-                //dbParam_Time.ParameterName = "@TrainingTime";
-                //dbParam_Time.Value = TrainingTitle.Text;
-                //dbParam_Time.DbType = System.Data.DbType.Time;
-                //cmd2.Parameters.Add(dbParam_Time);
-
-                //SqlParameter dbParam_Name = new SqlParameter();
-                //dbParam_Name.ParameterName = "@TrainerName";
-                //dbParam_Name.Value = TrainingTitle.Text;
-                //dbParam_Name.DbType = System.Data.DbType.StringFixedLength;
-                //cmd2.Parameters.Add(dbParam_Name);
-
-                //SqlParameter dbParam_Location = new SqlParameter();
-                //dbParam_Location.ParameterName = "@Location";
-                //dbParam_Location.Value = TrainingTitle.Text;
-                //dbParam_Location.DbType = System.Data.DbType.StringFixedLength;
-                //cmd2.Parameters.Add(dbParam_Location);
+                SqlParameter dbParam_Location = new SqlParameter();
+                dbParam_Location.ParameterName = "@Location";
+                dbParam_Location.Value = TBLocation.Text;
+                dbParam_Location.DbType = System.Data.DbType.StringFixedLength;
+                cmd2.Parameters.Add(dbParam_Location);
 
 
                 try
                 {
-                    cmd2.CommandText = "UPDATE TrainingHDR SET TrainingDate = CONVERT(DATE, '2025-04-04', 102) WHERE ProgramYear = '2024-2025' AND DistrictID = 'ICE' AND TrainingID = 7";
                     dbConnection.Open();
                     var recordcount = cmd2.ExecuteNonQuery();
+
+                    ShowMessageIcon("Saved", MessageType.Success);
+                }
+                catch
+                {
+                    ShowDialog("Alert", MessageType.Warning, "Updating is failed. Process cancelled.", "");
                 }
                 finally
                 { }
@@ -473,7 +543,49 @@ namespace Paperwork
                         tc.CssClass += " blueHighighter";
                     }
 
-                    HFTrainingID.Value = row.Cells[0].Text;
+                    //HFTrainingID.Value = row.Cells[0].Text;
+                    HFTrainingID.Value = ((Label)row.FindControl("LabelTrainingID")).Text;
+                }
+                else
+                {
+                    row.ToolTip = "Click to select this row.";
+                    row.BorderColor = Color.Empty;
+                    row.BorderWidth = 0;
+                    row.ForeColor = Color.Empty;
+
+                    //Latest Firefox update does not display row borders
+                    foreach (TableCell tc in row.Cells)
+                    {
+                        tc.CssClass = tc.CssClass.Replace(" blueHighighter", "");
+                    }
+                }
+            }
+
+        }
+
+        protected void GridViewTrainingAttendees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridView gv = (GridView)sender;
+            if (gv == null)
+                return;
+
+            foreach (GridViewRow row in gv.Rows)
+            {
+                if (row.RowIndex == gv.SelectedIndex)
+                {
+                    row.ToolTip = string.Empty;
+                    row.BorderColor = Color.Green;
+                    row.BorderWidth = 2;
+                    row.BorderStyle = BorderStyle.Solid;
+
+                    //Latest Firefox update does not display row borders
+                    foreach (TableCell tc in row.Cells)
+                    {
+                        tc.CssClass += " blueHighighter";
+                    }
+
+                    //HFTrainingID.Value = row.Cells[0].Text;
+                    HFAttendeeID.Value = ((Label)row.FindControl("LabelAttendeeID")).Text;
                 }
                 else
                 {
@@ -494,29 +606,98 @@ namespace Paperwork
 
         protected void ICreateClick(object sender, EventArgs e)
         {
-            //string InvoiceNumber = GetNextSpFnInvoiceNumber();
+            if (GenerateTrainingHdr() == false)
+            {
+                ShowDialog("Alert", MessageType.Warning, "The next Training header could not be created. Process cancelled.", "");
+                return;
+            }
+            else
+            {
+                GridViewTrainings.DataBind();
+                if (GridViewTrainings.Rows.Count > 0)
+                {
+                    GridViewTrainings.SelectRow(0);
+                    GridViewTrainings_SelectedIndexChanged(GridViewTrainings, EventArgs.Empty);
+                }
+            }
 
-            //if (string.IsNullOrEmpty(InvoiceNumber))
-            //{
-            //    ShowDialog("Alert", MessageType.Warning, "The next invoice number could not be retrieved. Process cancelled.", "");
-            //    return;
-            //}
+        }
 
-            //if (GenerateInvoiceHdr(InvoiceNumber) == false)
-            //{
-            //    ShowDialog("Alert", MessageType.Warning, "The next invoice header could not be created. Process cancelled.", "");
-            //    return;
-            //}
-            //else
-            //{
-            //    ShowMessageIcon("Invoice " + InvoiceNumber + " Created", MessageType.Success);
-            //    GridViewTrainings.DataBind();
-            //    if (GridViewTrainings.Rows.Count > 0)
-            //    {
-            //        GridViewTrainings.SelectRow(0);
-            //        GridViewTrainings_SelectedIndexChanged(GridViewTrainings, EventArgs.Empty);
-            //    }
-            //}
+        private bool GenerateTrainingHdr()
+        {
+            bool trainingGenerated = false;
+
+            string sqlGenerateInvoiceHdr = "INSERT INTO [TrainingHDR] ([ProgramYear],[DistrictID],[TrainingTitle],[TrainingDescription],[TrainingDate],[TrainingTime],[TrainerName]) "
+                + " VALUES(@ProgramYear, @DistrictID, @TrainingTitle, @TrainingDescription, @TrainingDate, @TrainingTime, @TrainerName);";
+
+            using (SqlConnection dbConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["connPaperwork"].ConnectionString))
+            {
+                dbConnection.Open();
+
+                using (SqlCommand cmdHdr = new SqlCommand(sqlGenerateInvoiceHdr, dbConnection))
+                {
+                    SqlParameter dbParam_progYear = new SqlParameter();
+                    dbParam_progYear.ParameterName = "@ProgramYear";
+                    dbParam_progYear.Value = DDLProgramYears.SelectedValue;
+                    dbParam_progYear.DbType = System.Data.DbType.String;
+                    cmdHdr.Parameters.Add(dbParam_progYear);
+
+                    SqlParameter dbParam_distID = new SqlParameter();
+                    dbParam_distID.ParameterName = "@DistrictID";
+                    dbParam_distID.Value = Session["CurrentDistrict"].ToString();
+                    dbParam_distID.DbType = System.Data.DbType.String;
+                    cmdHdr.Parameters.Add(dbParam_distID);
+                    
+                    SqlParameter dbParam_title = new SqlParameter();
+                    dbParam_title.ParameterName = "@TrainingTitle";
+                    TextBox TxtBxTrainingTitle = (TextBox)GridViewTrainings.HeaderRow.FindControl("TextBoxTrainingTitle");
+                    dbParam_title.Value = TxtBxTrainingTitle.Text;
+                    dbParam_title.DbType = System.Data.DbType.String;
+                    cmdHdr.Parameters.Add(dbParam_title);
+
+                    SqlParameter dbParam_description = new SqlParameter();
+                    dbParam_description.ParameterName = "@TrainingDescription";
+                    TextBox TxtBxTrainingDescription = (TextBox)GridViewTrainings.HeaderRow.FindControl("TextBoxTrainingDescription");
+                    dbParam_description.Value = TxtBxTrainingDescription.Text;
+                    dbParam_description.DbType = System.Data.DbType.String;
+                    cmdHdr.Parameters.Add(dbParam_description);
+
+                    SqlParameter dbParam_date = new SqlParameter();
+                    dbParam_date.ParameterName = "@TrainingDate";
+                    TextBox TxtBxTrainingDate = (TextBox)GridViewTrainings.HeaderRow.FindControl("TextBoxTrainingDate");
+                    dbParam_date.Value = TxtBxTrainingDate.Text;
+                    dbParam_date.DbType = System.Data.DbType.String;
+                    cmdHdr.Parameters.Add(dbParam_date);
+
+                    SqlParameter dbParam_time = new SqlParameter();
+                    dbParam_time.ParameterName = "@TrainingTime";
+                    TextBox TxtBxTrainingTime = (TextBox)GridViewTrainings.HeaderRow.FindControl("TextBoxTrainingTime");
+                    dbParam_time.Value = TxtBxTrainingTime.Text;
+                    dbParam_time.DbType = System.Data.DbType.String;
+                    cmdHdr.Parameters.Add(dbParam_time);
+
+                    SqlParameter dbParam_name = new SqlParameter();
+                    dbParam_name.ParameterName = "@TrainerName";
+                    TextBox TxtBxTrainerName = (TextBox)GridViewTrainings.HeaderRow.FindControl("TextBoxTrainerName");
+                    dbParam_name.Value = TxtBxTrainerName.Text;
+                    dbParam_name.DbType = System.Data.DbType.String;
+                    cmdHdr.Parameters.Add(dbParam_name);
+
+                    try
+                    {
+                        int recordCount = 0;
+                        recordCount = cmdHdr.ExecuteNonQuery();
+                        if (recordCount > 0)
+                            trainingGenerated = true;
+                    }
+                    catch (SqlException ex)
+                    { }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+
+            return trainingGenerated;
 
         }
 
@@ -524,6 +705,12 @@ namespace Paperwork
         {
             GridViewTrainings.DataBind();
             GridViewTrainings.SelectRow(0);
+        }
+
+        protected void GridViewTrainingAttendees_PageIndexChanged(object sender, EventArgs e)
+        {
+            GridViewTrainingAttendees.DataBind();
+            GridViewTrainingAttendees.SelectRow(0);
         }
 
 
